@@ -1,0 +1,87 @@
+!! !! means coment out ... ! means clone options
+! usecore=16 omp=1
+
+!!!! old setting ------------------------------------------------
+!!CblP
+!!MeCblP
+!!Me
+!!!!highspin
+!!MeCblP2 charge=1 mult=5 std2-def2tzvpp scf-niter=500
+!!CblP   charge=1 mult=4 std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!Me     charge=0 mult=2 std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!MeCblP2 charge=1 mult=5 std-def2svp scf-niter=500 SOSCF-KDIIS
+!!CblP   charge=1 spin=4 std-def2svp
+!!Me     charge=0 spin=2 std-def2svp
+
+!!!!lowspin
+!!MeCblP2 charge=1 mult=1 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!CblP    charge=1 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!Me      charge=0 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+
+!!MeCblP2 charge=1 mult=1 b3lyp std-def2svp scf-niter=500 SOSCF-KDIIS
+!!CblP    charge=1 mult=2 b3lyp std-def2svp scf-niter=500 SOSCF-KDIIS
+!!Me      charge=0 mult=2 b3lyp std-def2svp scf-niter=500 SOSCF-KDIIS
+
+!!MeCblP2 charge=1 mult=1 std-def2svp scf-niter=500 SOSCF-KDIIS TD=2
+!!CblP   charge=1 spin=2 std-def2svp
+!!Me     charge=0 spin=2 std-def2svp
+!!MeCblP charge=1 mult=1 std2-sto3g scf-niter=500
+!!CblP   charge=1 mult=2 std2-sto3g scf-niter=500
+!!Me     charge=0 mult=2 std2-sto3g scf-niter=500
+
+!!### scf bench ###
+!!benz-alkane_40_50 std-def2svp
+
+!!### CbiP bench ##
+!!MeCblP2 charge=1 mult=1 RIMP2-def2svp scf-niter=500
+!!CblP   charge=1 mult=2 RIMP2-def2svp scf-niter=500
+!!Me charge=0 mult=2 RIMP2-def2svp scf-niter=500
+
+!!MeCblP2 charge=1 mult=1 b3lyp std-def2svp scf-niter=500 SOSCF-KDIIS TD=2
+!!MeCblP2 charge=1 mult=1 b2plyp std-def2svp scf-niter=500 SOSCF-KDIIS TD=2
+!!MeCblP2 charge=1 mult=1 STEOM-DLPNO-CCSD def2svp-RIJ scf-niter=500 mdci=3
+
+!!!! new setting ------------------------------------------
+!!mecbi charge=1 mult=1 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!cbi   charge=1 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!ch3    charge=0 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!adcbi charge=1 mult=1 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!ad    charge=0 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!cbl-mecbl  charge=0 mult=1 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!cbl-cbl    charge=0 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!cbl-ch3    charge=0 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!cbl-adocbl charge=0 mult=1 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!cbl-ado    charge=0 mult=2 b3lyp std-def2tzvpp scf-niter=500 SOSCF-KDIIS
+!!cbi-mecbi  charge=1 mult=1 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbi-cbi    charge=1 mult=2 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbi-ch3    charge=0 mult=2 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbi-adocbi charge=1 mult=1 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbi-ado    charge=0 mult=2 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbl-mecbl  charge=0 mult=1 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbl-cbl    charge=0 mult=2 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbl-ch3    charge=0 mult=2 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbl-adocbl charge=0 mult=1 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!cbl-ado    charge=0 mult=2 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
+!!!!! mp2
+cbi-mecbi  charge=1 mult=1 RIMP2-def2tzvp scf-niter=500 
+cbi-cbi    charge=1 mult=2 RIMP2-def2tzvp scf-niter=500 
+cbi-ch3    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
+cbi-adocbi charge=1 mult=1 RIMP2-def2tzvp scf-niter=500 
+cbi-ado    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
+!!
+!!cbl-mecbl  charge=0 mult=1 RIMP2-def2tzvp scf-niter=500 
+!!cbl-cbl    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
+!!cbl-ch3    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
+!!cbl-adocbl charge=0 mult=1 RIMP2-def2tzvp scf-niter=500 
+!!cbl-ado    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
+!!! b3lyp svptzvpp
+!!cbi-mecbi  charge=1 mult=1 b3lyp std-def2svp scf-niter=500 
+!!cbi-cbi    charge=1 mult=2 b3lyp std-def2svp scf-niter=500 
+!!cbi-ch3    charge=0 mult=2 b3lyp std-def2svp scf-niter=500 
+!!cbi-adocbi charge=1 mult=1 b3lyp std-def2svp scf-niter=500 
+!!cbi-ado    charge=0 mult=2 b3lyp std-def2svp cf-niter=500 
+!!cbl-mecbl  charge=0 mult=1 b3lyp std-def2svp scf-niter=500 
+!!cbl-cbl    charge=0 mult=2 b3lyp std-def2svp scf-niter=500 
+!!cbl-ch3    charge=0 mult=2 b3lyp std-def2svp scf-niter=500 
+!!cbl-adocbl charge=0 mult=1 b3lyp std-def2svp scf-niter=500 
+!!cbl-ado    charge=0 mult=2 b3lyp std-def2svp scf-niter=500 

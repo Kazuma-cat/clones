@@ -1,0 +1,97 @@
+#!/bin/bash
+qn > qn.tmp
+option=${1:-default}
+case $option in
+    default)
+        ini_node=k00
+        end_node=k19 ;;
+    all)
+        ini_node=h01
+        end_node=k28 ;;
+    i)
+        ini_node=i00
+        end_node=i03 ;;
+    *)
+        echo "Error: undefined option '$option'"
+        exit 1
+esac
+count=0
+onskip=1
+nodes=()
+usecore=16
+fillnode=n
+n_node=1
+while read -a qns; do
+    [ $count -eq 0 ] && {
+        count=`expr "$count" + 1`
+        continue;
+    }
+    # determine the beggining point
+    [ $onskip -eq 1 ] && {
+        if [ ${qns[0]} = ${ini_node} ]; then
+            onskip=0
+        else
+            continue
+        fi
+    }
+    # determine the end point
+    [ $onskip = 0 ] && {
+        [ ${qns[0]} = ${end_node} ] && {
+            onskip=1
+        }
+    }
+    # skip node
+    [ ${qns[0]} = k02 ] && continue
+    [ ${qns[0]} = h04 ] && continue
+    [ ${qns[0]} = h06 ] && continue
+    # get free nodes
+    [ ${qns[1]} = free ] && {
+        # avoid nodes which have some jobs
+        [ ${#qns[@]} -eq 7 ] && {
+            threshcore=$usecore
+            if [ $fillnode = y ]; then
+                # get free node to fill its CPU
+                while [ $threshcore -le `expr ${qns[3]} - 2` ]; do threshcore=`expr "$threshcore" + "$usecore"`; nodes=(${nodes[@]} ${qns[0]}); done
+            else
+                # get free node a time for each node
+                nodes=(${nodes[@]} ${qns[0]})
+            fi
+        }
+    }
+done < qn.tmp
+echo "free nodes = ${nodes[@]}"
+rm qn.tmp
+count=0
+filelist=()
+qsublog=
+#date > qsublog
+date | tee -a qsublog ~/record/qsublog.rec
+pwd | tee -a qsublog ~/record/qsublog.rec
+# submit jops to each free node
+for file in ${filelist[@]}; do
+    i_node=1
+    while [ ${i_node} -le ${n_node} ]; do
+        node=${nodes[$count]}
+        [ -z $node ] && {
+            echo 'free nodes are too little compared with inputs'
+            exit 1
+        }
+        usenode="${node}:ppn=${usecore}"
+        if [ ${i_node} -eq 1 ]; then
+            nodeoption="nodes=${usenode}"
+        elif [ ${i_node} -ge 2 ]; then
+            nodeoption="${nodeoption}+${usenode}"
+        else
+            echo 'Error: inappropriate i_node value'
+        fi
+        i_node=`expr ${i_node} + 1`
+        let ++count
+    done
+    {
+        echo "${nodeoption}"
+        echo "${file}.sh"
+    } | tee -a qsublog ~/record/qsublog.rec
+    #qsub -l nodes=${node}:ppn=${usecore} $file.sh
+    qsub -l "${nodeoption}" $file.sh | tee -a qsublog ~/record/qsublog.rec
+    echo '' | tee -a qsublog ~/record/qsublog.rec
+done

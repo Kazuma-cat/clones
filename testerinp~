@@ -1,0 +1,20 @@
+!! !! means coment out ... ! means clone options
+!! template : H2P hint.isOnTheFly hint.ImplTypePM hint.ChargeType
+!! If juct scioption name is written, all of alternative options will be generated
+!! Don't insert blank in one option
+!! hint.isOnTheFly : =On or =Not
+!! hint.ImplTypePM : =incore or =MS
+!! hint.ChargeType : =Mull or =Low
+!! moread          : only moread
+!! options ... fillnode, OmitOptPos, ncopy
+! usecore=8 fillnode=n OmitOptPos=2,3 OrzVer=saitow-orz3
+!!H2P ImplTypePM=incore OnTheFly=On ChargeType=Low LocMet=PSM
+!!H2P ImplTypePM=incore OnTheFly=On ChargeType=Low Tj=1e-4,1e-3 Tl=1e-4,1e-3 Tr=1e-4,1e-3
+NF86-Mo ImplTypePM=incore OnTheFly=ON ChargeType=Low moread maxloop0
+!!NF86-Di ImplTypePM=incore OnTheFly=On ChargeType=Mull moread maxloop0
+!!NF86-Tri ImplTypePM=incore OnTheFly=On ChargeType mopread maxloop0
+!!NF86-Tet ImplTypePM=incore OnTheFly=On ChargeType=Mull moread
+!!NF86-Mo  LocMet=PSMVer2 moread maxloop0
+!!NF86-Di  LocMet=PSMVer2 moread maxloop0
+!!NF86-Tri LocMet=PSMVer2 moread maxloop0
+!!NF86-Tet LocMet=PSMVer2 moread

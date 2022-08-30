@@ -1,0 +1,194 @@
+!! !! means coment out ... ! means clone options
+!! template : H2P hint.isOnTheFly hint.ImplTypePM hint.ChargeType
+!! If juct scioption name is written, all of alternative options will be generated
+!! Don't insert blank in one option
+!! OnTheFly : =On or =Not
+!! ImplTypePM : =incore or =MS
+!! ChargeType : =Mull or =Low
+!! LocMet     : =PMNR,PSM,PSMVer2
+!! Tj         : =(number)
+!! Tl         : =(number)
+!! Tr         : =(number)
+!! PAOs       : use PAOs
+!! Ref        : acrive == 0 ? RIMP2 <- True : lct -> icmr
+!! active     : =(number) 
+!! moread          : only moread
+!! options ... fillnode, OmitOptPos, ncopy
+!! OrzVer ... orz_noGA orz_noGA2 orz_noGA3_PNONEV saitow-orz-MS5
+! usecore=16 fillnode=n n_node=1 genechk=y is_orblocsh=n OmitOptPos=0 OrzVer=orz_noGA3_PNONEV fullpack=n
+!!H2P ImplTypePM=incore OnTheFly=On ChargeType=Low Tj=1e-4,1e-3 Tl=1e-4,1e-3 Tr=1e-4,1e-3
+!!NF86-Mo  moread maxloop0 
+!!NF86-Di moread maxloop0 Ref
+!!NF86-Tri  PAOs moread maxloop0
+!!NF86-Tet PAOs  moread maxloop0
+!!benz-c30h62 moread maxloop0 LocMet=PMNR TCutPre=1e-7,1e-8,1e-9,1e-10,1e-11
+
+!! begin benzakl3 ------------------------------------------------------
+
+!!benz-alkane_60_100 moread-sto3g nolct chain
+!!benz-alkane_60_100 moread-loc-def2svp maxloop0 LocMet=PMNR chain
+!!benz-alkane_60_100 moread-loc-def2svp maxloop0 LocMet=PSM1 chain
+!!benz-alkane_60_100 moread-loc-def2svp maxloop0 newPAO chain
+!!benz-alkane_60_100 moread-loc-def2svp maxloop0 oldPAO chain
+!!benz-alkane_60_100 moread-loc-def2svp maxloop0 nolct locCA chain
+
+!!benz-alkane_110_150 Mbasis=sto-3g nolct chain
+!!benz-alkane_110_150 moread-sto3g Mbasis=def2svp nolct chain
+!! locCA  ###############################
+!!benz-alkane_110_150 moread-def2svp-reorder maxloop0 nolct locCA chain
+!!benz-alkane_120_150 moread2-def2svp-reorder maxloop0 nolct locCA 
+
+
+!! loc-casci ############################
+!!benz-alkane_10_50 moread-loc-def2svp maxloop0 LocMet=PMNR chain
+!!benz-alkane_10_50 moread-loc-def2svp maxloop0 LocMet=PSM1 chain
+!!benz-alkane_10_50 moread-loc-def2svp maxloop0 newPAO chain
+!!benz-alkane_10_50 moread-loc-def2svp maxloop0 oldPAO chain
+!!benz-alkane_110_150 moread-loc-def2svp maxloop0 LocMet=PMNR chain
+!!benz-alkane_110_150 moread-loc-def2svp maxloop0 LocMet=PSM1 chain
+!!benz-alkane_110_150 moread-loc-def2svp maxloop0 newPAO chain
+!!benz-alkane_110_150 moread-loc-def2svp maxloop0 oldPAO chain
+
+!!benz-alkane_10_100 moread-loc-def2svp maxloop0 newPAO chain
+!!benz-alkane_110_140 moread2-loc-def2svp maxloop0 newPAO chain
+!!benz-alkane_150_150 moread2-loc-def2svp maxloop0 newPAO chain StackSize=100000000
+
+!! loc-casci newPM ----------------------------------------------
+!!benz-alkane_10_100  moread-loc-def2svp  maxloop0 LocMet=newPMNR chain
+!!benz-alkane_110_140 moread2-loc-def2svp maxloop0 LocMet=newPMNR
+!!benz-alkane_150_150 moread2-loc-def2svp maxloop0 LocMet=newPMNR StackSize=100000000
+!! caspr2 newPM -------------------------------------------------
+!!benz-alkane_10_50 moread-casscf maxloop0 LocMet=newPMNR chain
+!! caspt2 -------------------------------------------------------
+!!benz-alkane_10_50 moread-casscf maxloop0 newPAO chain
+
+
+!! debug ---------------------------------------------------------
+!!benz-alkane_20_20 moread-loc-def2svp maxloop0 LocMet=PMNR  ImplTypePM chain
+
+!! newPMNR thresh test ##################
+!!benz-alkane_50_50 moread-casscf maxloop0 LocMet=newPMNR PMMaxIt=3 PMAB=1e-3,1e-4,1e-5,1e-6,1e-7 chain
+!!benz-alkane_50_50 moread-casscf maxloop0 LocMet=newPMNR PMMaxIt=3 PMang=1e-5,1e-6,1e-7,1e-8,1e-9 chain
+!!benz-alkane_50_50 moread-casscf maxloop0 LocMet=newPMNR PMMaxIt=3 PMtrunc=1e-3,1e-4,1e-5,1e-6,1e-7 chain
+!!benz-alkane_50_50 moread-casscf maxloop0 LocMet=newPMNR PMMaxIt=3 PMAB=1e-8,1e-9,1e-10,0 chain
+!!benz-alkane_50_50 moread-casscf maxloop0 LocMet=newPMNR PMMaxIt=3 PMang=1e-6,1e-5,1e-4,1e-3 chain
+!!benz-alkane_50_50 moread-casscf maxloop0 LocMet=newPMNR PMMaxIt=3 PMtrunc=1e-4,1e-3,1e-2,1e-1 chain
+!!benz-alkane_50_50 moread-casscf maxloop0 LocMet=newPMNR chain
+!!benz-alkane_50_50 moread-casscf      maxloop0 LocMet=newPMNR newPMtramix chain
+!!benz-alkane_50_50 moread-loc-def2svp maxloop0 LocMet=newPMNR newPMtramix chain
+!!benz-alkane_100_100 moread-loc-def2svp maxloop0 LocMet=newPMNR chain
+
+!! PNONEVPT2 ##########################
+!!benz-alkane_10_100  moread-loc-def2svp maxloop0 LocMet=PSM1 PNO-NEVPT2 chain
+!!benz-alkane_110_140 moread2-loc-def2svp maxloop0 LocMet=PSM1 PNO-NEVPT2
+!!benz-alkane_150_150 moread2-loc-def2svp maxloop0 LocMet=PSM1 StackSize=100000000 PNO-NEVPT2
+!!benz-alkane_10_100  moread-loc-def2svp maxloop0 newPAO PNO-NEVPT2
+!!benz-alkane_110_140 moread2-loc-def2svp maxloop0 newPAO PNO-NEVPT2
+
+!! NEVPT2    ##########################
+!!benz-alkane_10_40 moread-casscf maxloop0 NEVPT2 chain
+
+!! end benzakl3 ------------------------------------------------------
+
+
+!!tester
+
+!! begin cbls old ------------------------------------------------------
+!! highspin
+!!MeCblP nolct charge=1 mult=5
+!!CblP   nolct charge=1 mult=4
+!!Me     nolct charge=0 mult=2
+!!MeCblP nolct charge=1 mult=5 Mbasis=sto3g
+!! lowspin
+!!CblP nolct charge=1 mult=2 Mbasis=sto3g maxloop3000
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread-b3lyp-lowspin maxloop0 locDV
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-b3lyp-lowspin maxloop0 locDV
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-sto3g-lowspin maxloop0 locDV
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread-sto3g-lowspin maxloop0 locDV
+
+!!Me     nolct charge=0 mult=2 Mbasis=def2tzvpp
+!!CblP   nolct charge=1 mult=2 moread-def2svp
+
+!!SCF
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g b3lyp
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread2-b3lyp-sto3g-def2svp-lowspin
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g b3lyp
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g b3lyp
+!!CblP    nolct charge=1 mult=2 Mbasis=def2svp moread2-b3lyp-sto3g-def2svp-lowspin b3lyp
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=def2svp moread2-b3lyp-sto3g-def2svp-lowspin b3lyp
+!!CblP    nolct charge=1 mult=2 Mbasis=sto6g b3lyp
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto6g b3lyp
+
+!!locDV
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 locDV
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 locDV
+
+!!casscf ... basis is sto3g-def2svp
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread-reorder-b3lyp-sto3g-def2svp-lowspin maxloop0 act=6-7 roots=2.0:1 casscf
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-reorder-b3lyp-sto3g-def2svp-lowspin maxloop0 act=7-8 roots=1.0:1 casscf
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-testcas maxloop0 act=6-7 roots=1.0:1 casscf
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 act=5-7 roots=2.0:1 casscf
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 act=5-7 roots=1.0:1 casscf
+!!Me nolct charge=0 mult=2 roots=2.0:1 casscf
+
+!!test
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 act=5-7 roots=2.0:1 
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 act=5-7 roots=1.0:1 
+!!tmp_b3lyp
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 act=5-7 roots=2.0:1 
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g moread-b3lyp-sto3g-def2svp-lowspin maxloop0 act=5-7 roots=1.0:1 
+!!caspt2
+!!CblP    charge=1 mult=2 moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=2.0:1 LocMet=PSM1
+!!MeCblP2 charge=1 mult=1 moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=1.0:1 LocMet=PSM1
+!!CblP    charge=1 mult=2 moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=2.0:1 LocMet=PSM1 PNO-NEVPT2
+!!MeCblP2 charge=1 mult=1 moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=1.0:1 LocMet=PSM1 PNO-NEVPT2
+!!CblP    charge=1 mult=2 Mbasis=sto3g moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=2.0:1 LocMet=PSM1
+!!MeCblP2 charge=1 mult=1 Mbasis=sto3g moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=1.0:1 LocMet=PSM1
+!!Me charge=0 mult=2 Mbasis=sto3g roots=2.0:1 LocMet=PSM1
+!!###just orbprint ###
+!!CblP    charge=1 mult=2 moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 nolct 
+!!MeCblP2 charge=1 mult=1 moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 nolct
+
+
+!!---RECcas1---
+!!CblP    charge=1 mult=2 Mbasis=sto3g moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=2.0:1 nolct casscf
+!!MeCblP2 charge=1 mult=1 Mbasis=sto3g moread-cas-cbl-sto3g-def2svp-PNOCAS maxloop0 act=6-7 roots=1.0:1 nolct casscf
+!!---RECcas-locDV1---
+!!CblP    charge=1 mult=2 Mbasis=sto3g moread-locDV-cbl maxloop0 act=5-6 roots=2.0:1 nolct casscf
+!!MeCblP2 charge=1 mult=1 Mbasis=sto3g moread-locDV-cbl maxloop0 act=5-6 roots=1.0:1 nolct casscf
+!!Me charge=0 mult=2 roots=2.0:1 nolct casscf
+!!---caspt2-mycas2---
+!!CblP    charge=1 mult=2 moread2-cbl-mycas2 maxloop0 act=6-7 roots=2.0:1 LocMet=PSM1
+!!MeCblP2 charge=1 mult=1 moread2-cbl-mycas2 maxloop0 act=6-7 roots=1.0:1 LocMet=PSM1
+!!---caspt2-mycasloc1---
+!!CblP    charge=1 mult=2 moread2-cbl-mycasloc1 maxloop0 act=5-6 roots=2.0:1 LocMet=PSM1
+!!MeCblP2 charge=1 mult=1 moread2-cbl-mycasloc1 maxloop0 act=5-6 roots=1.0:1 LocMet=PSM1
+!!---caspt2-MScas---
+!!CblP    charge=1 mult=2 moread-MScas-cbls-sto6g-tzvpp maxloop0 act=5-5 roots=2.0:1 LocMet=PSM1
+!!MeCblP2 charge=1 mult=1 moread-MScas-cbls-sto6g-tzvpp maxloop0 act=5-5 roots=1.0:1 LocMet=PSM1
+!!MeCblP2 charge=1 mult=1 moread-MScas2-cbls-sto6g-tzvpp maxloop0 act=5-6 roots=1.0:1 LocMet=PSM1
+!!Me charge=0 mult=2 moread-casscf-sto6g-tzvpp moread0 roots=2.0:1 LocMet=PSM1
+!!---caspt2-MScas3---
+!!CblP    charge=1 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=2.0:1 LocMet=PSM1
+!!MeCblP2 charge=1 mult=1 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=1.0:1 LocMet=PSM1
+!!Me      charge=0 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=1-0 roots=2.0:1 LocMet=PSM1
+!!CblP    charge=1 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=2.0:1 newPAO
+!!MeCblP2 charge=1 mult=1 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=1.0:1 newPAO
+!!Me      charge=0 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=1-0 roots=2.0:1 newPAO
+!!CblP    charge=1 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=2.0:1 LocMet=PMNR
+!!MeCblP2 charge=1 mult=1 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=1.0:1 LocMet=PMNR
+!!Me      charge=0 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=1-0 roots=2.0:1 LocMet=PMNR
+!!CblP    charge=1 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=2.0:1 LocMet=PSM1 lvlshift=-0.1
+!!MeCblP2 charge=1 mult=1 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=1.0:1 LocMet=PSM1 lvlshift=-0.1
+!!Me      charge=0 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=1-0 roots=2.0:1 LocMet=PSM1 lvlshift=-0.1
+!!CblP    charge=1 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=2.0:1 LocMet=PSM1 ipeashift=0.25 lctmaxiter=150
+!!MeCblP2 charge=1 mult=1 moread-MScas3-cbls-svp-tzvpp maxloop0 act=5-5 roots=1.0:1 LocMet=PSM1 ipeashift=0.25 lctmaxiter=150
+!!Me      charge=0 mult=2 moread-MScas3-cbls-svp-tzvpp maxloop0 act=1-0 roots=2.0:1 LocMet=PSM1 ipeashift=0.25 Tl=5e-5
+
+!!---REC b3lyp---
+!!CblP    nolct charge=1 mult=2 Mbasis=sto3g b3lyp
+!!MeCblP2 nolct charge=1 mult=1 Mbasis=sto3g b3lyp
+
+!! end cbls old ------------------------------------------------------

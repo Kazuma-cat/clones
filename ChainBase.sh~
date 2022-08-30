@@ -1,0 +1,56 @@
+#!/bin/bash
+#PBS -M miinosuke2@gmail.com -j oe
+cd $PBS_O_WORKDIR
+
+# How to submit: qsub -l nodes=2:ppn=6:qj -v OMP=3 h2o.sh
+
+JOBNAMES=()
+#clone variables
+loctype=NONE
+
+for JOBNAME in ${JOBNAMES[@]}; do
+    # JOBNAME=
+    
+    export OMP_NUM_THREADS=1
+    if [ x$OMP != x ]; then
+        export OMP_NUM_THREADS=$OMP  # <= set num threads
+    fi
+    
+    # calc NP and PPN
+    NP=$(( $PBS_NP / $OMP_NUM_THREADS ))
+    PPN=$(( $PBS_NUM_PPN / $OMP_NUM_THREADS ))
+    
+    # In the input directory, you provide
+    # - $JOBNAME.py         # input file
+    # - $JOBNAME.chkx       # checkpoint file
+    
+    echo PBS_NP=$PBS_NP, PBS_NUM_PPN=$PBS_NUM_PPN, NP=$NP, PPN=$PPN, OMP_NUM_THREADS=$OMP_NUM_THREADS
+    
+    OUTFILE=$JOBNAME.out
+    SCRDIR=$TMPDIR
+    
+    . ~kazuma/orzconfig/gcc73.mvapich2.el75.2.sh
+    
+    export ORZSRC=~kazuma/orzsource/orz-git/
+    export ORZOBJ=~kazuma/orzsource/orz-git/obj-opt
+    
+    export PYTHONPATH=$ORZSRC/src/pylib
+    
+    cp -f $JOBNAME.chkx $SCRDIR/. || echo no init chkx
+    
+    `eval echo $MPIRUNQ` $ORZOBJ/src/sci/scf/scf -w ${SCRDIR} $JOBNAME.py >& $JOBNAME.py.scf
+    #casscf#`eval echo $MPIRUNQ` $ORZOBJ/src/sci/casscf/casscf -w ${SCRDIR} $JOBNAME.py >& $JOBNAME.py.casscf
+
+    # localization section
+    [ ${loctype} != NONE ] && . orbloc.sh $JOBNAME $loctype
+
+    #`eval echo $MPIRUNQ` $ORZOBJ/src/sci/icmr/icmr -w ${SCRDIR} $JOBNAME.py >& $JOBNAME.py.icmr-gamba
+    `eval echo $MPIRUNQ` $ORZOBJ/src/sci/lct/lct -w ${SCRDIR} $JOBNAME.py >& $JOBNAME.py.lct
+    
+    # Fetch the information on MOs
+    cp $SCRDIR/$JOBNAME.chkx ./${JOBNAME}_out.chkx
+    cp $SCRDIR/$JOBNAME.fchk ./${JOBNAME}_out.fchk
+    cp $SCRDIR/$JOBNAME.lct .
+    cp $SCRDIR/$JOBNAME.loc-01.fchk .
+    cp $SCRDIR/$JOBNAME.py ./${JOBNAME}_out.py
+done

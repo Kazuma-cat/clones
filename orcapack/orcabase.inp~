@@ -1,0 +1,8 @@
+! _keyword
+# maxcore specify memories used per core
+%maxcore 20000
+%pal nprocs _aug_np END
+%scf maxiter _niter END
+*xyz _charge _mult
+geom
+*

@@ -1,0 +1,10 @@
+%chk=
+%mem=100GB
+%NProcShared=2
+#P jobtype method/base
+
+title
+
+charge spin
+geom
+

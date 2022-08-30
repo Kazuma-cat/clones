@@ -1,0 +1,60 @@
+cp ${RefDir}ChainBase.sh ${Dir}${chain_or_dist}${nindex}.sh
+[ ${ischain} = y ] && tmp=${Reses[@]}
+[ ${isdistribute} = y ] && tmp=$dist_pack
+[ ${is_fullpack} = y ] && tmp=$names_fullpack
+sed -i -e "s/JOBNAMES=.*/JOBNAMES=(${tmp})/g" ${Dir}${chain_or_dist}${nindex}.sh
+if [ ${MSorz} = y ]; then
+    sed -i -e "s/ORZSRC=.*/ORZSRC=~kazuma\/saitow-orz-MS\/orz-stack/g" ${Dir}${chain_or_dist}${nindex}.sh
+    sed -i -e "s/ORZOBJ=.*/ORZOBJ=~kazuma\/saitow-orz-MS\/orz-stack\/obj-opt/g" ${Dir}${chain_or_dist}${nindex}.sh
+    MSorz=n
+elif [ ${MS5orz} = y ]; then
+    sed -i -e "s/ORZSRC=.*/ORZSRC=~kazuma\/saitow-orz-MS5\/orz-stack/g" ${Dir}${chain_or_dist}${nindex}.sh
+    sed -i -e "s/ORZOBJ=.*/ORZOBJ=~kazuma\/saitow-orz-MS5\/orz-stack\/obj-opt/g" ${Dir}${chain_or_dist}${nindex}.sh
+    MS5orz=n
+elif [ ${temp_orz} = y ]; then
+    sed -i -e "s/ORZSRC=.*/ORZSRC=~kazuma\/saitow-orz_temp\/orz/g" ${Dir}${chain_or_dist}${nindex}.sh
+    sed -i -e "s/ORZOBJ=.*/ORZOBJ=~kazuma\/saitow-orz_temp\/orz\/obj-opt/g" ${Dir}${chain_or_dist}${nindex}.sh
+    temp_orz=n
+elif [ ${orzgit2} = y ]; then
+    sed -i -e "s|ORZSRC=.*|ORZSRC=~kazuma/orzsource/orz-git2/|g" ${Dir}${chain_or_dist}${nindex}.sh
+    sed -i -e "s|ORZOBJ=.*|ORZOBJ=~kazuma/orzsource/orz-git2/obj-opt|g" ${Dir}${chain_or_dist}${nindex}.sh
+    orzgit2=n
+elif [ ${orzmod} = y ]; then
+    sed -i -e "s|ORZSRC=.*|ORZSRC=~kazuma/orzsource/orz-mod/|g" ${Dir}${chain_or_dist}${nindex}.sh
+    sed -i -e "s|ORZOBJ=.*|ORZOBJ=~kazuma/orzsource/orz-mod/obj-opt|g" ${Dir}${chain_or_dist}${nindex}.sh
+    orzmod=n
+else
+    echo "default orz setting is used"
+    #sed -i -e "s/ORZSRC=.*/ORZSRC=~kazuma\/${OrzVer}\/orz-stack/g" ${Dir}${chain_or_dist}${nindex}.sh
+    #sed -i -e "s/ORZOBJ=.*/ORZOBJ=~kazuma\/${OrzVer}\/orz-stack\/obj-opt/g" ${Dir}${chain_or_dist}${nindex}.sh
+fi
+[ $ref_icmr = y ] && {
+    sed -i -e "s/lct/icmr/g" ${Dir}${chain_or_dist}${nindex}.sh
+    ref_icmr=n
+    #echo 'lct -> icmr'
+}
+[ $is_casscf = y ] && {
+    sed -i -e "s/#casscf#//g" ${Dir}${chain_or_dist}${nindex}.sh
+    is_casscf=n
+    echo 'turn on casscf option'
+}
+[ $is_nolct = y ] && {
+    sed -i -e 's|`eval echo $MPIRUNQ` $ORZOBJ/src/sci/lct/lct|#`eval echo $MPIRUNQ` $ORZOBJ/src/sci/lct/lct|g' ${Dir}${chain_or_dist}${nindex}.sh
+    is_nolct=n
+    #echo 'lct -> #lct'
+}
+
+if [ $loctype = NONE ]; then
+    :
+elif [ $loctype = DV ]; then
+    sed -i -e 's/loctype=NONE/loctype=DV/g' ${Dir}${chain_or_dist}${nindex}.sh
+elif [ $loctype = CA ]; then
+    sed -i -e 's/loctype=NONE/loctype=CA/g' ${Dir}${chain_or_dist}${nindex}.sh
+elif [ $loctype = nC ]; then
+    sed -i -e 's/loctype=NONE/loctype=nC/g' ${Dir}${chain_or_dist}${nindex}.sh
+fi
+sed -i -e "s/filelist=(/filelist=(${chain_or_dist}${nindex} /g" ${Dir}qsub.sh
+[ $genechk = y ] && sed -i -e "s/filelist=(/filelist=(${tmp} /g" ${Dir}genechk.sh
+[ ${ischain} = y ] && nchain=`expr ${nchain} + 1` && ischain=n
+[ ${isdistribute} = y ] && isdistribute=n
+unset source_check

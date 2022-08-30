@@ -1,0 +1,94 @@
+         NODE  STAT  TYPE   NP   LOAD   NET    MEM   USED  JOBS
+          g00  job-    qg   16   0.00         251g     2g  0-15/82496
+          g01  job-    qg   16   0.00         251g     2g  0-15/82499
+          g02  job-    qg   16   0.00         251g     2g  0-15/82500
+          g03  job-    qg   16   0.00         220g     2g  0-15/82501
+          g04  job-    qg   16   0.00         251g     2g  0-15/82502
+          g05  job-    qg   16  16.00         251g     3g  0-15/82970
+          g06  free    qg   16   0.00         251g     2g  
+          g07  job-    qg   16   0.00         251g     2g  0-15/82503
+          h01  free   qh0   20   0.01         377g     3g  
+          h06  free   qh0   20   0.00         377g     3g  
+          h00  free    qh   20   0.00         377g     3g  
+          h02  free    qh   20   0.00         377g     3g  
+          h03  free    qh   20   0.01         377g     3g  
+          h04  free    qh   20   0.01         377g     3g  
+          h05  free    qh   20   0.00         377g     3g  
+          i00  free    qi   32   0.00         755g     6g  
+          i01  free    qi   32   0.00         755g     6g  
+          i02  free    qi   32   0.04         755g     6g  
+          i03  free    qi   32   2.65         755g    11g  16-31/82976
+          j00  free    qj   24   0.00         377g     4g  
+          j01  free    qj   24   0.00         377g     4g  
+          k00  free    qk   32   0.04         376g     4g  
+          k01  job-    qk   32  29.80         376g    10g  0-31/82840
+          k02  down    qk   32   8.06         376g    25g  0-7/82187
+          k03  free    qk   32   0.04         376g     4g  
+          k04  free    qk   32   0.01         376g     4g  
+          k05  job-    qk   32  29.55         376g     7g  0-31/82965
+          k06  free    qk   32   0.04         376g     4g  
+          k07  down    qk   32      -           0g     0g  0-31/79700
+          k08  free    qk   32   0.01         376g     4g  
+          k09  free    qk   32   0.04         376g     4g  
+          k10  free    qk   32   0.03         376g     4g  
+          k11  free    qk   32   0.04         376g     4g  
+          k12  free    qk   32   0.00         376g     4g  
+          k13  free    qk   32   0.00         376g     4g  
+          k14  free    qk   32   0.04         376g     4g  
+          k15  free    qk   32   0.00         376g     4g  
+          k16  free    qk   32   0.00         376g     3g  
+          k17  free    qk   32   0.00         376g     4g  
+          k18  free    qk   32   0.00         376g     4g  
+          k19  down    qk   32   0.17         346g     3g  
+          k20  free    qk   40   0.00         376g     4g  
+          k21  free    qk   40   0.00         376g     4g  
+          k22  free    qk   40   0.00         376g     4g  
+          k23  free    qk   40   0.00         376g     4g  
+          e00  job-    qe   12   0.04          94g     1g  0-11/82778
+          e01  free    qe   12   0.00          86g     1g  
+          e02  down    qe   12      -           0g     0g  
+          e03  down    qe   12      -           0g     0g  
+          e04  free    qe   12   0.00          94g     1g  
+          e05  free    qe   12   0.00          94g     1g  
+          e06  free    qe   12   0.00          94g     1g  
+          e07  free    qe   12   0.01          78g     1g  
+          e08  free    qe   12   0.00          78g     1g  
+          e09  down    qe   12      -           0g     0g  
+          e10  free    qe   12   0.00          94g     1g  
+          e11  down    qe   12      -           0g     0g  
+          e12  free    qe   12   0.00          94g     1g  
+          e13  down    qe   12      -           0g     0g  
+          e14  free    qe   12   0.00          78g     1g  
+          e15  down    qe   12      -           0g     0g  
+          f00  free    qe   12   0.00          78g     1g  
+          f01  free    qe   12   0.00          94g     1g  
+          f02  free    qe   12   0.00          94g     1g  
+          f03  free    qe   12   0.00          78g     1g  
+          f04  down    qe   12      -           0g     0g  
+          f05  down    qe   12      -           0g     0g  
+          f06  down    qe   12      -           0g     0g  
+          f07  free    qe   12   0.00          62g     0g  
+  compute-2-0  job-   qc2   16   4.68          62g     9g  0-15/82961
+  compute-2-1  job-   qc2   16   1.45          62g    46g  0-15/82106
+  compute-2-2  job-   qc2   16   2.38          62g    16g  0-15/82953
+  compute-2-3  job-   qc2   16  16.00          62g     2g  0-15/82894
+  compute-2-4  job-   qc2   16   3.52          62g    16g  0-15/82954
+  compute-2-5  job-   qc2   16   2.58          62g    16g  0-15/82955
+  compute-2-6  job-   qc2   16   3.47          62g    13g  0-15/82760
+  compute-2-7  down   qc2   16      -           0g     0g  
+  compute-2-8  down   qc2   16      -           0g     0g  
+  compute-2-9  job-   qc2   16   5.15          62g     7g  0-15/82960
+ compute-2-10  job-   qc2   16   5.51          62g    39g  0-15/82749
+ compute-2-11  job-   qc2   16   4.50          62g    16g  0-15/82957
+ compute-2-12  down   qc2   16      -           0g     0g  
+ compute-2-13  down   qc2   16      -           0g     0g  
+ compute-2-14  job-   qc2   16   3.74          62g    14g  0-15/82958
+ compute-2-15  job-   qc2   16   6.72          62g    16g  0-15/82959
+ compute-2-16  free   qc2   16   0.18          62g     1g  
+ compute-2-17  job-   qc2   16   4.91          62g    39g  0-15/82757
+ compute-2-18  down   qc2   16      -           0g     0g  
+ compute-2-19  job-   qc2   16   5.22          62g    14g  0-15/82956
+ compute-2-20  job-   qc2   16   6.08          62g    35g  0-15/82761
+ compute-2-21  job-   qc2   16   6.23          62g    15g  0-15/82063
+ compute-2-24  job-   qc2   16   5.10          62g    43g  0-15/82046
+          qcl  free   qcl   16   0.95         376g    15g  

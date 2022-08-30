@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# defining function
+orz2xyz(){
+    filename=$1
+    newfname=$2
+    in_geom=n
+    natom=0
+    filebase=`basename $filename`
+    echo "natom" > ${newfname}
+    echo "${filebase}" >> ${newfname}
+    while read -a line; do
+        [ ${#line} != 0 ] && [ ${line:0:1} = ']' ] && { in_geom=n; continue;}
+        [ ${in_geom} = y ] &&{
+            atom=`echo ${line[@]} | grep -o 'atom..,'`
+            atom=${atom:5:1}
+            [ -z $atom ] || natom=`expr $natom + 1`
+            #echo $atom
+            #echo ${line[@]}
+            xyz=`echo ${line[@]} | grep -o '\[.*\]' | sed 's/ //g' | sed 's/,/ /g'`
+            xyz=${xyz:1:-1}
+            xyzline="${atom} ${xyz}"
+            echo $xyzline >> $newfname
+        }
+        [ ${#line} -ge 4 ] && [ ${line:0:4} = geom ] && in_geom=y
+        [ ${#line} != 0 ] && [ ${line:0:1} = ']' ] && { in_geom=n; continue;}
+    done < ${filename}
+    echo $natom
+    sed -i -e "s/natom/${natom}/g" $newfname
+}
+
+# main section
+pydir=~/clones/pyfile
+geomdir=~/clones/geom
+dirlist=`ls $pydir`
+echo $dirlist
+skiplist='H2P.py NF86-Di.py NF86-Mo.py NF86-Tet.py NF86-Tri.py'
+[ n = y ] && {
+    for pydir2 in `ls $pydir`; do
+        [ -d "${geomdir}/${pydir2}" ] || mkdir ${geomdir}/${pydir2}
+        for filebase in `ls ${pydir}/${pydir2}`; do
+            [ ${filebase: -1} = '~' ] && continue
+            is_skip=n
+            for tmp in ${skiplist}; do
+                [ tmp = $filebase ] && is_skip=y
+            done
+            [ $is_skip = y ] && { echo "${filebase} is skipped"; continue;}
+            #filename="${pydir}/${pydir2}/${filename}"
+            filename="${pydir}/${pydir2}/${filebase}"
+            newfname="${geomdir}/${pydir2}/${filebase}"
+            echo $filename
+            orz2xyz $filename $newfname
+        done
+    done
+}

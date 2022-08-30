@@ -1,0 +1,23 @@
+#!/bin/bash
+actmod(){
+    Name=$1
+    Dir=$2
+    active=`echo $Name | grep -o 'act[0-9]\+'`
+    echo $active
+    active=${active:3}
+    tmps=(${active//-/ })
+    active_occ=${tmps[0]}
+    active_vir=${tmps[1]}
+    closed=`grep 'icmr.closed' $Dir$Name.py | grep -o '[0-9]\+'`
+    occ=`grep 'icmr.occ' $Dir$Name.py | grep -o '[0-9]\+'`
+    echo $active_occ
+    echo $active_vir
+    echo $closed
+    echo $occ
+    closed=`expr $closed + $occ - $active_occ`
+    active=`expr $active_occ + $active_vir`
+    echo $closed
+    echo $active
+    sed -i -e "s/icmr.closed\s*=.*/icmr.closed = \[$closed\]/g" $Dir$Name.py 
+    sed -i -e "s/icmr.occ\s*=.*/icmr.occ = \[$active\]/g" $Dir$Name.py 
+}

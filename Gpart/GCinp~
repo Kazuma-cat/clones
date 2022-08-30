@@ -1,0 +1,7 @@
+!! !! means coment out ... ! means clone options
+!
+!!benz-alkane_10_40 opt b3lyp def2svp GD3BJ
+!!benz-alkane_80_100 opt b3lyp def2svp GD3BJ mem300G chain
+!!norcorrole b3lyp
+CblP
+MeCblP

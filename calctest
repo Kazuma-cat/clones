@@ -1,0 +1,7 @@
+#!/bin/bash
+JOBNAME=c2h4_PNO-NEVPT2
+export ORZSRC=~kazuma/saitow-orz-MS5/orz-stack
+export ORZOBJ=~kazuma/saitow-orz-MS5/orz-stack/obj-opt
+export PYTHONPATH=$ORZSRC/src/pylib
+[ -e $JOBNAME.py.scf ] || $ORZOBJ/src/sci/scf/scf $JOBNAME.py | tee $JOBNAME.py.scf
+$ORZOBJ/src/sci/lct/lct $JOBNAME.py | tee $JOBNAME.py.lct
