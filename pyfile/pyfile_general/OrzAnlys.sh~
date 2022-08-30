@@ -1,0 +1,25 @@
+#!/bin/bash
+DirTex=~/research/orz-output/TeXTable/
+DirOut=~/research/orz-output/1result/
+DirFunc=~/functions/
+DirCur=`pwd`
+#tableoption='conv'  
+#tablename='loctable'
+tableoption='energy_DThresh'  
+tablename='energy_table'
+# filenames <- all .py.lct file in current directory
+tmp=(`ls ${DirOut}*.py.lct`)
+echo ${tmp[@]}
+for filename in ${tmp[@]}; do
+    filenames=(${filenames[@]} `basename $filename`)
+done                
+echo "filenames = ${filenames[@]}"
+
+# call retrieve_orzdata.py <- table option, table name, filenames
+cd $DirOut
+${DirFunc}retrieve_orzdata.py $tableoption $tablename ${filenames[@]}
+
+# compile tex data in DirTex
+cd tex
+ptex2pdf -l $tablename
+mv ${tablename}.pdf ${DirTex}
