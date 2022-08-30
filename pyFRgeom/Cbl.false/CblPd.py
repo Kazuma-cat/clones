@@ -1,0 +1,311 @@
+from sci import *
+
+import os
+
+qatom.basis = baslib("def2-svp") # Molecule Basis Set
+Ctz = baslib("def2-TZVPP").C
+Csvp = baslib("def2-SVP").C
+Cotz = baslib("def2-TZVPP").Co
+Cosvp = baslib("def2-SVP").Co
+Ntz = baslib("def2-TZVPP").N
+Nsvp = baslib("def2-SVP").N
+geom = [
+qatom(atom.Co, [-0.8627324, -0.0267212, -0.7447215]),
+qatom(atom.C, [0.3849484, 1.7240976, 1.1547597]),
+qatom(atom.C, [-0.1358807, 2.5287654, 2.4013822]),
+qatom(atom.C, [-0.9615118, 1.4409721, 3.1592014]),
+qatom(atom.C, [-1.4942689, 0.6136996, 2.0115933]),
+qatom(atom.C, [-2.7029153, -0.1534056, 2.0493386]),
+qatom(atom.C, [-3.0258557, -0.9926975, 1.0108912]),
+qatom(atom.C, [-4.3248853, -1.7848101, 0.8150494]),
+qatom(atom.C, [-3.7733213, -2.9628101, -0.0376544]),
+qatom(atom.C, [-2.7549799, -2.2201274, -0.8502200]),
+qatom(atom.C, [-2.4614616, -2.4981759, -2.1710612]),
+qatom(atom.C, [-1.5855755, -1.7710918, -2.9585881]),
+qatom(atom.C, [-1.4162878, -1.9784047, -4.4496764]),
+qatom(atom.C, [-0.0231833, -1.3343573, -4.6669448]),
+qatom(atom.C, [0.0476139, -0.3413193, -3.5228002]),
+qatom(atom.C, [0.8961018, 0.7401700, -3.4896513]),
+qatom(atom.C, [0.9991704, 1.5704963, -2.3256272]),
+qatom(atom.C, [1.7817747, 2.8798730, -2.2183467]),
+qatom(atom.C, [1.7518266, 3.1367720, -0.6766396]),
+qatom(atom.C, [0.4730217, 2.4267358, -0.2238557]),
+qatom(atom.C, [1.7059026, 0.9805952, 1.3913056]),
+qatom(atom.C, [0.9364972, 3.1434631, 3.3053849]),
+qatom(atom.C, [-1.1097555, 3.6916384, 1.9968163]),
+qatom(atom.C, [-2.3913244, 3.3088240, 1.2553520]),
+qatom(atom.C, [-0.1713389, 0.5706292, 4.1697566]),
+qatom(atom.C, [-1.0293362, -0.4620910, 4.9261374]),
+qatom(atom.C, [-0.1430734, -1.5421624, 5.5230489]),
+qatom(atom.C, [-3.6655036, 0.0552618, 3.2036376]),
+qatom(atom.C, [-5.1261223, -2.2694120, 2.0252196]),
+qatom(atom.C, [-5.2643425, -0.9150822, -0.1307574]),
+qatom(atom.C, [-4.9928085, 0.5796517, -0.0105961]),
+qatom(atom.C, [-3.1548061, -4.1400507, 0.7616793]),
+qatom(atom.C, [-2.0435683, -3.8251443, 1.7742978]),
+qatom(atom.C, [-0.6737610, -3.5581729, 1.1563025]),
+qatom(atom.C, [-2.4810768, -1.0990880, -5.1557273]),
+qatom(atom.C, [-1.5670057, -3.4254779, -4.9258246]),
+qatom(atom.C, [1.1693567, -2.3208634, -4.6273614]),
+qatom(atom.C, [1.3812541, -3.0434475, -3.2873729]),
+qatom(atom.C, [2.1549871, -2.2163525, -2.2705766]),
+qatom(atom.C, [1.7225091, 1.0399578, -4.7224963]),
+qatom(atom.C, [0.9885899, 3.9566131, -2.9952441]),
+qatom(atom.C, [1.8911521, 4.6269946, -0.3377635]),
+qatom(atom.C, [2.5219311, 4.9731047, 1.0044445]),
+qatom(atom.C, [3.2577461, 2.8538915, -2.6838560]),
+qatom(atom.C, [4.0273761, 1.5520748, -2.4342002]),
+qatom(atom.C, [4.5270108, 1.3012962, -1.0164902]),
+qatom(atom.C, [5.2767157, -0.4745503, 0.5116698]),
+qatom(atom.C, [4.7753638, -1.8454835, 0.9658482]),
+qatom(atom.C, [5.5991271, -2.3874525, 2.1279017]),
+qatom(atom.N, [-0.7240515, 0.7299000, 0.9523908]),
+qatom(atom.N, [-2.2460285, -1.1854095, -0.1323897]),
+qatom(atom.N, [-0.8225377, -0.7407010, -2.5125870]),
+qatom(atom.N, [0.3289713, 1.3261001, -1.2217523]),
+qatom(atom.N, [-3.4979771, 3.1485049, 2.0123912]),
+qatom(atom.N, [0.0394398, -1.5205058, 6.8641074]),
+qatom(atom.N, [-4.2180430, 1.1185825, -0.9813027]),
+qatom(atom.N, [0.2463397, -3.0069285, 1.9766398]),
+qatom(atom.N, [1.6451564, -2.1849805, -1.0221886]),
+qatom(atom.N, [3.6784691, 4.3253282, 1.2987444]),
+qatom(atom.N, [4.6039490, -0.0085733, -0.6924171]),
+qatom(atom.O, [-2.4277672, 3.1477081, 0.0233514]),
+qatom(atom.O, [0.4017149, -2.3882898, 4.8042432]),
+qatom(atom.O, [-5.4321526, 1.2490518, 0.9357358]),
+qatom(atom.O, [-0.4267440, -3.8563714, -0.0233866]),
+qatom(atom.O, [3.2089962, -1.6378671, -2.5912998]),
+qatom(atom.O, [2.0048895, 5.7981188, 1.7603962]),
+qatom(atom.O, [4.8995107, 2.2071020, -0.2510738]),
+qatom(atom.O, [3.3652192, -1.7939979, 1.3186225]),
+qatom(atom.H, [-1.7668956, 1.9343339, 3.7110404]),
+qatom(atom.H, [-4.5608216, -3.3794544, -0.6744271]),
+qatom(atom.H, [-2.9742221, -3.3365322, -2.6280895]),
+qatom(atom.H, [0.0032248, -0.8280517, -5.6360223]),
+qatom(atom.H, [2.6084219, 2.5991914, -0.2680477]),
+qatom(atom.H, [-0.4074486, 3.0647154, -0.3452981]),
+qatom(atom.H, [2.5135663, 1.6842687, 1.6085192]),
+qatom(atom.H, [1.9683740, 0.4211280, 0.4904092]),
+qatom(atom.H, [1.6214882, 0.2745263, 2.2169928]),
+qatom(atom.H, [1.7306017, 2.4320470, 3.5419599]),
+qatom(atom.H, [1.3796178, 4.0347979, 2.8635353]),
+qatom(atom.H, [0.4727728, 3.4531484, 4.2494254]),
+qatom(atom.H, [-0.5618349, 4.4161879, 1.3897361]),
+qatom(atom.H, [-1.3775172, 4.2043306, 2.9280430]),
+qatom(atom.H, [0.6076959, 0.0151164, 3.6471729]),
+qatom(atom.H, [0.3233245, 1.2259713, 4.8923835]),
+qatom(atom.H, [-1.6829024, -0.9812440, 4.2225148]),
+qatom(atom.H, [-1.6575881, 0.0222543, 5.6812612]),
+qatom(atom.H, [-4.6326967, 0.3941956, 2.8266036]),
+qatom(atom.H, [-3.8235534, -0.8523586, 3.7919567]),
+qatom(atom.H, [-3.2931843, 0.8174625, 3.8858685]),
+qatom(atom.H, [-5.6852024, -1.4603834, 2.4945265]),
+qatom(atom.H, [-4.4967716, -2.7481702, 2.7794170]),
+qatom(atom.H, [-5.8524850, -3.0121765, 1.6766715]),
+qatom(atom.H, [-5.1243954, -1.2334457, -1.1686828]),
+qatom(atom.H, [-6.3035446, -1.1025523, 0.1480576]),
+qatom(atom.H, [-2.7593412, -4.8576408, 0.0358351]),
+qatom(atom.H, [-3.9722485, -4.6385051, 1.2931963]),
+qatom(atom.H, [-2.3083750, -2.9943918, 2.4363097]),
+qatom(atom.H, [-1.9192314, -4.7014722, 2.4245310]),
+qatom(atom.H, [-3.4905515, -1.4295436, -4.8925499]),
+qatom(atom.H, [-2.3632128, -1.1761815, -6.2415641]),
+qatom(atom.H, [-2.3711310, -0.0478520, -4.8689000]),
+qatom(atom.H, [-2.6026503, -3.7601504, -4.8082198]),
+qatom(atom.H, [-1.3242237, -3.4945542, -5.9908766]),
+qatom(atom.H, [-0.9229023, -4.1179864, -4.3789610]),
+qatom(atom.H, [2.0895641, -1.7792869, -4.8658452]),
+qatom(atom.H, [1.0204318, -3.0599412, -5.4205994]),
+qatom(atom.H, [0.4415878, -3.3931892, -2.8501203]),
+qatom(atom.H, [1.9981705, -3.9318221, -3.4702356]),
+qatom(atom.H, [2.6871639, 0.5214752, -4.7056480]),
+qatom(atom.H, [1.9214249, 2.1059513, -4.8205619]),
+qatom(atom.H, [1.1983969, 0.7284731, -5.6277420]),
+qatom(atom.H, [-0.0107732, 4.0952550, -2.5707806]),
+qatom(atom.H, [1.5127953, 4.9162018, -2.9683943]),
+qatom(atom.H, [0.8718102, 3.6709517, -4.0438556]),
+qatom(atom.H, [0.9298338, 5.1427314, -0.3839320]),
+qatom(atom.H, [2.5380237, 5.0910653, -1.0940844]),
+qatom(atom.H, [3.3163326, 3.0866727, -3.7501827]),
+qatom(atom.H, [3.7751581, 3.6743167, -2.1699427]),
+qatom(atom.H, [4.9384910, 1.5767718, -3.0474217]),
+qatom(atom.H, [3.4624986, 0.6770837, -2.7643895]),
+qatom(atom.H, [5.1263306, 0.2719759, 1.3006625]),
+qatom(atom.H, [6.3600390, -0.5377113, 0.3387241]),
+qatom(atom.H, [4.8046217, -2.5473889, 0.1253583]),
+qatom(atom.H, [5.1963462, -3.3480306, 2.4580245]),
+qatom(atom.H, [6.6426107, -2.5301413, 1.8297102]),
+qatom(atom.H, [5.5807254, -1.6907163, 2.9747304]),
+qatom(atom.H, [-4.3383549, 2.7255319, 1.5991889]),
+qatom(atom.H, [-3.4863606, 3.3397393, 3.0030774]),
+qatom(atom.H, [0.6223316, -2.2277648, 7.2938062]),
+qatom(atom.H, [-0.4225559, -0.8479601, 7.4582459]),
+qatom(atom.H, [-3.8024734, 0.5161271, -1.6788736]),
+qatom(atom.H, [-3.7675561, 2.0243197, -0.8041230]),
+qatom(atom.H, [0.0902879, -2.8288435, 2.9734151]),
+qatom(atom.H, [1.2098395, -2.9571838, 1.6625329]),
+qatom(atom.H, [2.2340183, -1.8257432, -0.2684316]),
+qatom(atom.H, [0.8851820, -2.8285324, -0.7548585]),
+qatom(atom.H, [4.1515058, 3.6905836, 0.6510262]),
+qatom(atom.H, [4.1724205, 4.6151195, 2.1327877]),
+qatom(atom.H, [4.2326941, -0.6926258, -1.3697274]),
+qatom(atom.H, [3.2626327, -1.1180913, 2.0089419]),
+] 
+
+qatom.unit = unit.angstrom
+
+qmolecule = molecule( geom, charge=0, mult=1, sym=sym.C1 )
+print qmolecule
+
+qatom.basis = baslib("def2-svp/jkfit")
+Ctz = baslib("def2-TZVPP/jkfit").C
+Csvp = baslib("def2-SVP/jkfit").C
+Cotz = baslib("def2-TZVPP/jkfit").Co
+Cosvp = baslib("def2-SVP/jkfit").Co
+Ntz = baslib("def2-TZVPP/jkfit").N
+Nsvp = baslib("def2-SVP/jkfit").N
+
+acene = [ i.new_basis() for i in geom]
+qmolecule_RI_JK = molecule(acene, charge=0, mult=1, sym=sym.C1) # hojokitei in icmr module
+casscf.no4c_RI_JK = True
+hint.use_RI_JK = True
+hint.itrf_RI_JK_memory = 2000
+hint.trafo_algo = "RI-SemiDirect-Disk"
+
+benzene = [ i.new_basis() for i in geom]
+qmolecule_RI_C = molecule(benzene, charge=0, mult=1, sym=sym.C1) # hojokitei in lct module
+
+qmolecule_RI_C = qmolecule_RI_JK
+
+scf.maxloop = 300
+scf.tol_density = 1e-4
+scf.orb_print = 'all'
+#scf.guess = "moread"
+
+# orb info bgn ------------
+# orig frozen ... 72.00
+# orig closed ... 192.00
+# orb info end ------------
+### CASSCF calculations
+casscf.scfinp = key.scfread
+casscf.orbconfig = "symlist"
+casscf.frozen = [0]
+casscf.closed = [264]
+casscf.occ = [0]
+casscf.roots = {1.0:1}
+
+casscf.maxMacroloop = 100
+casscf.tolMacroloop = 1e-5
+
+prop.dipmom = True
+
+casscf.citype = "fullci"
+casscf.CI_restartGrad = casscf.tolMacroloop
+casscf.CI_onedotGrad = casscf.tolMacroloop
+
+casscf.debugkeys=["canonical"]
+
+# ICMR
+icmr.orbconfig = "symlist"
+icmr.frozen = [72]
+icmr.closed = [192]
+icmr.occ = [0]
+icmr.roots  = {1.0:1}
+icmr.citype = casscf.citype
+
+icmr.localize_type = casscf.localize_type
+icmr.use_3RDM = True # kept True
+icmr.use_4RDM = True
+icmr.use_d4cum_of = False # ???
+icmr.ampAllocType = 2 # 1=disk, 2=GA
+icmr.icb_type = -2 # 0=MS-MR, 1=MS-SR, 2=SS-SR
+icmr.xms_type = 0 # 0=Non-XMS, 1=XMS
+icmr.pt.ipeashift = 0
+icmr.pt.lvl_shift = 0.0 # level shift (<0 imaginary level shift)
+icmr.pt.toliter = 1e-8
+icmr.pt.tolOrthExternal = 1e-8
+icmr.pt.tolOrthInternal = 1e-8
+
+icmr.method = "caspt2"
+
+
+# LCT
+lct.Ansatz = "PNO-CASPT2"
+lct.DoLoc       = True
+lct.DoCEPT2     = True
+lct.NewTrafo    = True
+lct.Make4EXT    = False
+
+lct.TCutPNOrho0 = 1e-8
+lct.TCutPNOrho1 = 1e-8
+lct.TCutPNOrho2 = 1e-8
+lct.TCutPairs   = 1e-5
+lct.TCutPre     = 1e-6
+
+lct.MaxIter = 50
+
+lct.DoCEPT2     = False
+lct.NNewTrafo   = True
+lct.NewTrafo    = (not lct.NNewTrafo)
+lct.TrafoMode   = "Disk"
+lct.NewAlgoPNO  = True
+lct.OVLMode     = lct.TrafoMode
+
+# Use of Local PAO/PNO
+lct.UsePAOs = False
+lct.TCutDOI_PAO = 1e-2
+lct.UseNewDomain = True
+lct.FormLVOs = True
+lct.UseVM1_CD   = True
+lct.UseVM12     = (not lct.UseVM1_CD)
+
+lct.PrintPairDistDBG = True
+lct.PrintMapsDBG     = True
+
+lct.LocMet = "PSM"
+lct.LocRecursive = True
+lct.LocMeasure = True
+hint.nroots = 1
+hint.nconvroots = 1
+
+# new PMNR scheme threshold (impl = sparse, locrec = True)
+lct.PMMaxIt = 3
+lct.PMStep = 0.01
+lct.GThresh = 5.0e-3
+lct.IterLevel = 2
+hint.PM_trunc_thresh = 1e-1
+hint.PM_AB_thresh = 1e-4
+hint.PM_ang_thresh = 1e-6
+hint.ChargeType = "Loewdin"
+hint.ImplTypePM = "sparse"
+# ---------------------------------------
+
+hint.PSMVersion = 2
+lct.LocPower = 1
+
+hint.jacobi_thresh     = 1e-6 # Convergence threshold for Jacobi rotations
+hint.loc_thresh        = 1e-6 # Convergence thrshold for grad norm
+hint.cg_thresh         = 1e-6 # Convergence threshold for preconditioned conjugate gradient(=PCG) iterations
+hint.res_tol           = 1e-6
+hint.kscal = 5e-3
+hint.print_dvd  = True
+hint.stepThresh = 0.5
+hint.maximize_niter = 1000
+hint.nmicroiter     = 1000
+
+# # No Domain
+lct.DomScheme = 'Scheme1'
+lct.TCutDOI = 1e-3
+
+##
+lct.StackSize = 50000000
+# old option
+#lct.test        = False
+#lct.DoPNO       = True
+#lct.UseOrthPNOs = True
+#lct.RIMP2 = False 
+#hint.isOnTheFly = True
+#hint.PMNRdebug = "no-debug"
+
+# add option
+
