@@ -142,6 +142,9 @@
 !!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 nocrude FBPAO TCutDOIActive=1e-2 TCutPairs=1e-6 TCutPNOrho0=1e-9 StackSize=150000000 PNO-NEVPT2
 !!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 stdCrude PMPAO TCutDOIActive=1e-2 TCutDOIPAOCrude=1e-1,6.66e-2,3.33e-2 TCutPairsCrude=6.66e-7 StackSize=100000000 PNO-NEVPT2
 !!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 nocrude FBPAO TCutDOIActive=1e-2 TCutPairs=1e-6 StackSize=150000000 PNO-NEVPT2
+!!!!chk in orz-git2
+!!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 nocrude FBPAO TCutDOIActive=1e-2 TCutPairs=1e-8,1e-9 TCutPNOrho0=5e-9,1e-9 StackSize=150000000 PNO-NEVPT2 orzgit2
+!!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude FBPAO TCutPairs=1e-8,1e-9 TCutPNOrho0=5e-9,1e-9 StackSize=150000000 PNO-NEVPT2 orzgit2
 
 !!! aa
 !!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 stdCrude2 FBPAO TCutDOIActive=1e-2 TCutPairs=1e-6 TCutDOIPAOCrude=1e-1,6.66e-2,3.33e-2 StackSize=150000000 PNO-NEVPT2
@@ -273,8 +276,8 @@
 !!cbi-cbi    charge=1 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-9e10o    maxloop0 act=5-5 roots=2.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 LocMet=PMNR chain PNO-CASPT2
 !!cbi-mecbi  charge=1 mult=1 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-10e10o   maxloop0 act=5-5 roots=1.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 LocMet=PMNR chain PNO-CASPT2 
 !!cbi-adocbi charge=1 mult=1 Mbasis=svptzvpp moread-casscf-cbi-t2svptzvpp-10e10o maxloop0 act=5-5 roots=1.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 LocMet=PMNR chain PNO-CASPT2 
-cbi-ado    charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-1e1o     maxloop0 act=1-0 roots=2.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 LocMet=PMNR chain PNO-CASPT2 
-cbi-ch3    charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-1e1o     maxloop0 act=1-0 roots=2.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 LocMet=PMNR locthresh=8e-5 chain PNO-CASPT2
+!!cbi-ado    charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-1e1o     maxloop0 act=1-0 roots=2.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 LocMet=PMNR chain PNO-CASPT2 
+!!cbi-ch3    charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-1e1o     maxloop0 act=1-0 roots=2.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 LocMet=PMNR locthresh=8e-5 chain PNO-CASPT2
 !!! FBPAO
 !!cbi-cbi    charge=1 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-9e10o    maxloop0 act=5-5 roots=2.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 FBPAO chain PNO-CASPT2
 !!cbi-mecbi  charge=1 mult=1 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-10e10o   maxloop0 act=5-5 roots=1.0:1 newstdCrude ipeashift=0,0.25 lvlshift=0,0.1,0.3,-0.1 FBPAO chain PNO-CASPT2 
@@ -306,6 +309,37 @@ cbi-ch3    charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-1e1o     m
 !!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude FBPAO StackSize=150000000 PNO-NEVPT2
 !!cbl-ado     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude FBPAO PNO-NEVPT2 
 !!cbl-ch3     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude FBPAO locthresh=5e-5 PNO-NEVPT2
+!!! cbls newnoT
+!!cbl-cbl     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-9e10o  maxloop0 roots=2.0:1 act=5-5 newnocrude LocMet=PSM1 PNO-NEVPT2 orzgit2
+!!cbl-mecbl   charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newnocrude LocMet=PSM1 PNO-NEVPT2 orzgit2
+!!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newnocrude LocMet=PSM1 StackSize=150000000 PNO-NEVPT2 orzgit2
+!!cbl-ado     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newnocrude LocMet=PSM1 PNO-NEVPT2 orzgit2
+!!cbl-ch3     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newnocrude LocMet=PSM1 locthresh=5e-5 PNO-NEVPT2 orzgit2
+!!! cbls new setting PNOCASPT2
+!!! PSM1
+!!cbl-cbl     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-9e10o  maxloop0 roots=2.0:1 act=5-5 newstdCrude LocMet=PSM1 PNO-CASPT2 
+!!cbl-mecbl   charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude LocMet=PSM1 PNO-CASPT2
+!!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude LocMet=PSM1 StackSize=150000000 PNO-CASPT2 
+!!cbl-ado     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude LocMet=PSM1 PNO-NEVPT2 
+!!cbl-ch3     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude LocMet=PSM1 locthresh=5e-5 PNO-CASPT2
+!!! PMNR
+!!cbl-cbl     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-9e10o  maxloop0 roots=2.0:1 act=5-5 newstdCrude LocMet=PMNR PNO-CASPT2 
+!!cbl-mecbl   charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude LocMet=PMNR PNO-CASPT2
+!!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude LocMet=PMNR StackSize=150000000 PNO-CASPT2
+!!cbl-ado     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude LocMet=PMNR PNO-CASPT2 
+!!cbl-ch3     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude LocMet=PMNR locthresh=5e-5 PNO-CASPT2
+!!! FBPAO
+!!cbl-cbl     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-9e10o  maxloop0 roots=2.0:1 act=5-5 newstdCrude FBPAO PNO-CASPT2 
+!!cbl-mecbl   charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude FBPAO PNO-CASPT2
+!!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude FBPAO StackSize=150000000 PNO-CASPT2
+!!cbl-ado     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude FBPAO PNO-CASPT2 
+!!cbl-ch3     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude FBPAO locthresh=5e-5 PNO-CASPT2
+!!! PMPAO
+!!cbl-cbl     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-9e10o  maxloop0 roots=2.0:1 act=5-5 newstdCrude PMPAO PNO-CASPT2 
+!!cbl-mecbl   charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude PMPAO PNO-CASPT2
+!!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude PMPAO StackSize=150000000 PNO-CASPT2
+!!cbl-ado     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude PMPAO PNO-CASPT2 
+!!cbl-ch3     charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbl-t1svptzvpp-1e1o   maxloop0 roots=2.0:1 act=1-0 newstdCrude PMPAO locthresh=5e-5 PNO-CASPT2
 !!! FBPAO test DOIPAO
 !!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude FBPAO TCutDOIPAO=1e-3    TCutDOIPAOCrude=1e-3    StackSize=150000000 PNO-NEVPT2
 !!cbl-adocbl  charge=0 mult=1 Mbasis=svptzvpp moread-casscf-cbl-t2svptzvpp-10e10o maxloop0 roots=1.0:1 act=5-5 newstdCrude FBPAO TCutDOIPAO=3.33e-3 TCutDOIPAOCrude=3.33e-3 StackSize=150000000 PNO-NEVPT2
@@ -353,6 +387,45 @@ cbi-ch3    charge=0 mult=2 Mbasis=svptzvpp moread-casscf-cbi-svptzvpp-1e1o     m
 !!benz-alkane_130_130 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2
 !!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 
 !!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 StackSize=150000000
+!!! casscf for PAO second (to give appropriate domain size for )
+!!benz-alkane_10_50 moread-casscf-benzalk-def2svp maxloop0 FBPAO       newstdCrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_10_50 moread-casscf-benzalk-def2svp maxloop0 PMPAO       newstdCrude chain PNO-NEVPT2 orzgit2
+!!! large syetem for PAO second (to give appropriate domain size for )
+!!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 StackSize=150000000 orzgit2
+!!benz-alkane_10_120  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_130_130 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 StackSize=150000000 orzgit2
+!!benz-alkane_10_120  moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_130_130 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 StackSize=150000000 orzgit2
+!! large system for LVMO det anlys
+benz-alkane_10_10  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 orzmod PrintAllEps
+!!benz-alkane_50_50  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
+!!benz-alkane_100_100  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
+!!benz-alkane_50_50  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
+!!benz-alkane_100_100  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
+!!benz-alkane_50_50  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
+
+!!! large syetem for PAO second DOIActPAO
+!!benz-alkane_10_120  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 DOIActPAO
+!!benz-alkane_130_130 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 DOIActPAO
+!!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 DOIActPAO
+!!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 StackSize=150000000 orzgit2 DOIActPAO
+!!benz-alkane_10_120  moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 orzgit2 DOIActPAO
+!!benz-alkane_130_130 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 orzgit2 DOIActPAO
+!!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 orzgit2 DOIActPAO
+!!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 StackSize=150000000 orzgit2 DOIActPAO
+!!!! nnocrude TCuTDOI=1e-3
+!!benz-alkane_10_120  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 stdnocrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_130_130 moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 stdnocrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 stdnocrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 stdnocrude chain PNO-NEVPT2 StackSize=150000000 orzgit2
+!!benz-alkane_10_120  moread-lochf-benzalk-def2svp maxloop0 LocMet=PMNR stdnocrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_130_130 moread-lochf-benzalk-def2svp maxloop0 LocMet=PMNR stdnocrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 LocMet=PMNR stdnocrude chain PNO-NEVPT2 orzgit2
+!!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 LocMet=PMNR stdnocrude chain PNO-NEVPT2 StackSize=150000000 orzgit2
 !!!! new nocrude bench
 !!benz-alkane_10_100  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newnocrude chain PNO-NEVPT2
 !!benz-alkane_110_110 moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newnocrude chain PNO-NEVPT2

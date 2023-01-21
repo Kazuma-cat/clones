@@ -115,7 +115,8 @@ case $opt in
     stdnocrude)
         sed -i -e 's/lct.DoTwoStepGuess =.*/lct.DoTwoStepGuess = False/g' $Dir$Name.py
         sed -i -e 's/lct.TCutDOI =.*/lct.TCutDOI = 1e-3/g' $Dir$Name.py
-        sed -i -e 's/lct.TCutPairs_Crude =.*/lct.TCutPairs_Crude = 1e-5/g' $Dir$Name.py;;
+        sed -i -e 's/lct.TCutPairs\s*=.*/lct.TCutPairs = 3.33e-6/g' $Dir$Name.py
+        sed -i -e 's/lct.TCutDOI_PAO =.*/lct.TCutDOI_PAO = 1e-2/g' $Dir$Name.py;;
     nocrude)
         sed -i -e 's/lct.DoTwoStepGuess =.*/lct.DoTwoStepGuess = False/g' $Dir$Name.py;;
     newnocrude)
@@ -123,6 +124,8 @@ case $opt in
         sed -i -e 's/lct.TCutPairs\s*=.*/lct.TCutPairs = 3.33e-6/g' $Dir$Name.py
         sed -i -e 's/lct.TCutDOI =.*/lct.TCutDOI = 3.33e-4/g' $Dir$Name.py
         sed -i -e 's/lct.TCutDOI_PAO =.*/lct.TCutDOI_PAO = 1e-2/g' $Dir$Name.py;;
+    PrintAllEps)
+        sed -i -e 's/lct.PrintAllEps =.*/lct.PrintAllEps = True/g' $Dir$Name.py;;
     oldPAO)
         sed -i -e 's/lct.UsePAOs =.*/lct.UsePAOs = True/g' $Dir$Name.py
         sed -i -e 's/lct.FormLVOs =.*/lct.FormLVOs = False/g' $Dir$Name.py
@@ -149,6 +152,8 @@ case $opt in
         sed -i -e 's/lct.UseNewDomain =.*/lct.UseNewDomain = True/g' $Dir$Name.py
         sed -i -e 's/lct.LocRecursive =.*/lct.LocRecursive = False/g' $Dir$Name.py
         sed -i -e 's/lct.TCutDOI_Active =.*/lct.TCutDOI_Active = 1e-2/g' $Dir$Name.py;;
+    DOIActPAO)
+        sed -i -e 's/lct.TCutDOI_Active =.*/lct.TCutDOI_Active = 1.75e-2/g' $Dir$Name.py;;
     NaivePAO)
         sed -i -e 's/lct.UseNaiveMapPAOs\s*=.*/lct.UseNaiveMapPAOs = True/g' $Dir$Name.py;;
     casscf)

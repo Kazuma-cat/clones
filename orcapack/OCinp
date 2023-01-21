@@ -63,11 +63,11 @@
 !!cbl-adocbl charge=0 mult=1 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
 !!cbl-ado    charge=0 mult=2 b3lyp std-def2qzvp scf-niter=500 SOSCF-KDIIS
 !!!!! mp2
-cbi-mecbi  charge=1 mult=1 RIMP2-def2tzvp scf-niter=500 
-cbi-cbi    charge=1 mult=2 RIMP2-def2tzvp scf-niter=500 
-cbi-ch3    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
-cbi-adocbi charge=1 mult=1 RIMP2-def2tzvp scf-niter=500 
-cbi-ado    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
+!!cbi-mecbi  charge=1 mult=1 RIMP2-def2tzvp scf-niter=500 
+!!cbi-cbi    charge=1 mult=2 RIMP2-def2tzvp scf-niter=500 
+!!cbi-ch3    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
+!!cbi-adocbi charge=1 mult=1 RIMP2-def2tzvp scf-niter=500 
+!!cbi-ado    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
 !!
 !!cbl-mecbl  charge=0 mult=1 RIMP2-def2tzvp scf-niter=500 
 !!cbl-cbl    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500 
@@ -85,3 +85,15 @@ cbi-ado    charge=0 mult=2 RIMP2-def2tzvp scf-niter=500
 !!cbl-ch3    charge=0 mult=2 b3lyp std-def2svp scf-niter=500 
 !!cbl-adocbl charge=0 mult=1 b3lyp std-def2svp scf-niter=500 
 !!cbl-ado    charge=0 mult=2 b3lyp std-def2svp scf-niter=500 
+!!! b3lyp tzvp
+!!cbi-mecbi  charge=1 mult=1 b3lyp std-def2tzvp scf-niter=500 
+!!cbi-cbi    charge=1 mult=2 b3lyp std-def2tzvp scf-niter=500 
+!!cbi-ch3    charge=0 mult=2 b3lyp std-def2tzvp scf-niter=500 
+!!cbi-adocbi charge=1 mult=1 b3lyp std-def2tzvp scf-niter=500 
+!!cbi-ado    charge=0 mult=2 b3lyp std-def2tzvp scf-niter=500 
+cbl-mecbl  charge=0 mult=1 b3lyp std-def2tzvp scf-niter=500 
+cbl-cbl    charge=0 mult=2 b3lyp std-def2tzvp scf-niter=500 
+cbl-ch3    charge=0 mult=2 b3lyp std-def2tzvp scf-niter=500 
+cbl-adocbl charge=0 mult=1 b3lyp std-def2tzvp scf-niter=500 
+cbl-ado    charge=0 mult=2 b3lyp std-def2tzvp scf-niter=500
+

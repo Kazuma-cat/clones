@@ -64,6 +64,8 @@ while read -a line; do
                     keyword="${keyword} def2-svp def2/j RIJCOSX TightSCF D3BJ";;
                 def2svp-RIJ)
                     keyword="${keyword} def2-svp def2-TZVPP/C def2/j RIJCOSX";;
+                std-def2tzvp)
+                    keyword="${keyword} def2-tzvp def2/j RIJCOSX TightSCF D3BJ";;
                 std-def2tzvpp)
                     keyword="${keyword} def2-tzvpp def2/j RIJCOSX TightSCF D3BJ";;
                 std-def2qzvp)

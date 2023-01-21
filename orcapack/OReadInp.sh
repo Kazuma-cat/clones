@@ -1,7 +1,7 @@
 #!/bin/bash
 # check whether molecule original python script in clone directory
 count=0
-defined_words="std-def2svp std-def2tzvpp std-def2qzvp std-def2qzvpp std2-sto3g std2-def2tzvpp RIMP2-def2svp RIMP2-def2tzvp RIMP2-def2tzvpp chain  SOSCF-KDIIS b3lyp b2plyp STEOM-DLPNO-CCSD def2svp-RIJ"
+defined_words="std-def2svp std-def2tzvp std-def2tzvpp std-def2qzvp std-def2qzvpp std2-sto3g std2-def2tzvpp RIMP2-def2svp RIMP2-def2tzvp RIMP2-def2tzvpp chain  SOSCF-KDIIS b3lyp b2plyp STEOM-DLPNO-CCSD def2svp-RIJ"
 for word in ${line[@]}; do
     # check whether molecule original python script in clone directory
     [ "$count" -eq 0 ] && {

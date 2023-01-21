@@ -4,7 +4,7 @@ count=0
 # simple option
 opt_method="PMPAO FBPAO newPAO oldPAO Ref RIMP2 CASPT2 PNO-CASPT2 NEVPT2 PNO-NEVPT2 calctest casscf b3lyp"
 opt_moread="moreadonly moread-sto3g moread-sto3g-lowspin moread-b3lyp-lowspin moread-b3lyp-sto3g-def2svp-lowspin moread2-b3lyp-sto3g-def2svp-lowspin moread-reorder-b3lyp-sto3g-def2svp-lowspin moread-def2svp moread-def2svp-reorder moread2-def2svp-reorder moread-loc-def2svp moread2-loc-def2svp moread-def2tzvp moread-locDV-cbl moread-cas-cbl-sto3g-def2svp-PNOCAS moread-casscf moread2-cbl-mycas2 moread2-cbl-mycasloc1 moread-testcas moread-MScas-cbls-sto6g-tzvpp moread-MScas2-cbls-sto6g-tzvpp maxloop0 moread-MScas3-cbls-svp-tzvpp moread-sto6g moread-sto6g-svp moread-sto6g-tzvpp moread-casscf-sto6g-svp moread-casscf-sto6g-tzvpp"
-opt_other="orzgit2 orzmod chain distribute nolct MS5orz noGA3 CMO locCA locDV locnC DOIFabs stdCrude stdCrude2 newstdCrude stdnocrude nocrude newnocrude noniterPM nontruncincorePM NaivePAO"
+opt_other="orzgit2 orzmod chain distribute nolct MS5orz noGA3 CMO locCA locDV locnC DOIFabs stdCrude stdCrude2 newstdCrude stdnocrude nocrude newnocrude noniterPM nontruncincorePM NaivePAO DOIActPAO PrintAllEps"
 defined_opts="${opt_method} ${opt_moread} ${opt_other}"
 
 # number option
