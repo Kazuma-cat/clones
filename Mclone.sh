@@ -10,65 +10,76 @@ for tmp in ${tmps[@]}; do
     geomdirs="${geomdirs[@]} ${geomroot}/${tmp}"
 done
 export geomdirs
-. ${orcaroot}/func_Mclone.sh
+. ${molcroot}/func_Mclone.sh
+
 # predefining argument  -----------------
 usecore=16
 omp=1
 nchain=1
 is_chain=n
-#cp ${RefDir}qsub.sh $Dir
-#chmod +x ${Dir}qsub.sh
+re_RASSCF="RASSCF-[0-9]+,[0-9]+--[0-9]+,[0-9]+,[0-9]+--[0-9]+,[0-9]+,[0-9]+--[0-9]+,[0-9]+,[0-9]+"
+case_RASSCF="RASSCF-[0-9]*,[0-9]*--[0-9]*,[0-9]*,[0-9]*--[0-9]*,[0-9]*,[0-9]*--[0-9]*,[0-9]*,[0-9]*"
+tmp="RASSCF-0,1--10,0,0--0,10,0--6,6,1"
+tmp2="2"
+
 # main process --------------------------
-while read -a line; do
-    [ -z ${line} ] && continue
-    [ ${line[0:1]} != '@' ] continue
-    [ ${line[0:2]} != '@@' ] && {
+cp ${RefDir}/sbatch.sh $dir
+chmod +x $dir/sbatch.sh
+while read -a setline; do
+    #cat $molcroot/MCinp
+    [ -z ${setline} ] && continue
+    line="${setline[@]}"
+    [ ${line:0:1} != '@' ] && continue
+    [ ${line:0:2} = '@@' ] && {
         for opt in ${line[@]}; do
             [ "`echo $opt | grep 'usecore='`" ] && usecore=${opt:8}
-            [ "`echo $opt | grep 'omp='`" ] && omp=${opt:4}
-            continue
         done
+        continue
     }
+    line=${line:1}
     names=
     . ${molcroot}/MReadInp.sh ${line[@]} # OReadInp
     [ "`echo ${names[@]} | grep 'Error'`" ] && {
-        echo "Error: names variable contains inapproprite string, names='${names[@]}'"
+        echo "Error: names variable contains inapproprite string, names='${names[@]}'.(in ${BASH_SOURCE[0]})"
         exit 1
     }
     for name in $names; do
-        cp cp ${molcroot}/molcbase.input $dir/$name.input
-        sed -i -e "s/TITLE=/TITLE=$name/g" $dir/$name.input;;
-        sed -i -e "s/GROUP=/GROUP=nosym/g" $dir/$name.input;;
+        cp ${molcroot}/molcbase.input $dir/$name.input
+        sed -i -e "s/TITLE=/TITLE=$name/g" $dir/$name.input
+        sed -i -e "s/GROUP=/GROUP=nosym/g" $dir/$name.input
         name_spl_=(${name//_/ })
         molname=${name_spl_[0]}
         # fixed variable for case-----
-        case_RASSCF="RASSCF(\d+,\d+)(\d+,\d+,\d+)(\d+,\d+,\d+)(\d+,\d+,\d+)"
+        #case_RASSCF="RASSCF(\d+,\d+)(\d+,\d+,\d+)(\d+,\d+,\d+)(\d+,\d+,\d+)"
         # ----------------------------
-        for spl in ${splited_name[@]}; do
+        for spl in ${name_spl_[@]}; do
             case $spl in
-                $molName)
+                $molname)
                     geompaths=(`retgeompath $name $molname`)
                     cp ${geompaths[0]} $dir/$name.xyz
-                    sed -i -e "s/COORD=/COORD=${geompaths[1]}/g" $dir/$name.input;;
+                    sed -i -e "s/COORD=/COORD=${name}.xyz/g" $dir/$name.input;;
                 SVP)
                     sed -i -e "s/BASIS=/BASIS=SVP/g" $dir/$name.input;;
                 TZVP)
                     sed -i -e "s/BASIS=/BASIS=TZVP/g" $dir/$name.input;;
                 SCF)
-                    sed -i -e "s/*tail/&SCF\n*tail/g" $dir/$name.input;;
+                    sed -i -e "s/*tail/\&SCF\n\n*tail/g" $dir/$name.input;;
                 $case_RASSCF)
-                    sed -i -e "s/*tail/&RASSCF\n*tail/g" $dir/$name.input
-                    tmp=${spl//'('/ }
-                    tmp=(${tmp//')'/ })
+                    sed -i -e "s/*tail/\&RASSCF\n*tail/g" $dir/$name.input
+                    tmp=(${spl//'-'/ })
                     tmp1=(${tmp[1]//','/ });tmp3=(${tmp[3]//','/ });
                     charge=${tmp1[0]};mult=${tmp1[1]};
                     nactel=${tmp[2]}
                     ras1=${tmp3[0]};ras2=${tmp3[1]};ras3=${tmp3[2]};
                     ciroot=${tmp[4]}
                     norbs=(`readxyz $dir/$name.xyz`)
-                    elclosed=$((${norbs[0]} + ${norbs[1]}))
-                    tmp=`python -c print(($elclosed-$charge-${nactel[0]})/2)`
-                    inactorb=`printf '%.0f\n' $closed`
+                    closedel=$((${norbs[0]} + ${norbs[1]}))
+                    nactel1=${nactel//,*/ }
+                    #tmp=`python -c print($elclosed-$charge-${nactel[0]}/2)`
+                    tmp=`expr $closedel - $charge - $nactel1`
+                    closedorb=`awk "BEGIN { print $tmp/2 }"`
+                    #closedorb="`echo "scale=2; $tmp/2 " | bc`"
+                    inactorb=`printf '%.0f\n' $closedorb`
                     sed -i -e "s/*tail/SPIN=$mult\n*tail/g" $dir/$name.input
                     sed -i -e "s/*tail/NACTEL=$nactel\n*tail/g" $dir/$name.input
                     sed -i -e "s/*tail/INACT=$inactorb\n*tail/g" $dir/$name.input
@@ -76,12 +87,15 @@ while read -a line; do
                     sed -i -e "s/*tail/RAS2=$ras2\n*tail/g" $dir/$name.input
                     sed -i -e "s/*tail/RAS3=$ras3\n*tail/g" $dir/$name.input
                     sed -i -e "s/*tail/CIROOT=$ciroot\n*tail/g" $dir/$name.input
-                    sed -i -e "s/*tail/LUMORB\n*tail/g" $dir/$name.input
+                    sed -i -e "s/*tail/LUMORB\n\n*tail/g" $dir/$name.input
                     ;;
                 *)
                     ;;
             esac
             cp ${molcroot}/molcsh_fugu.sh $dir/$name.sh
+            sed -i -e "s/JOBNAME=.*/JOBNAME=${name}/g" $dir/${name}.sh
         done # End spl
-    done
+        sed -i -e "s/filelist=(/filelist=(${names} /g" $dir/sbatch.sh
+    done # End name
 done < $molcroot/MCinp
+echo "--- END Mclone ---"

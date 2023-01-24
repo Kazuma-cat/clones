@@ -20,5 +20,5 @@ JOBNAME=
 pymolcas -b 1 -f $JOBNAME.input 
 
 wait
-
-cp -r * $SLURM_SUBMIT_DIR
+mkdir $SLURM_SUBMIT_DIR/output
+cp -r * $SLURM_SUBMIT_DIR/output/

@@ -1,15 +1,13 @@
 #!/bin/bash
 # check whether molecule original python script in clone directory
 count=0
-defined_words="TZVP SVP"
+defined_words="TZVP SVP SCF"
 opts_num=""
 for opt in ${line[@]}; do
     # check whether molecule original python script in clone directory
     [ "$count" -eq 0 ] && {
         MolName="$opt"
-        echo $MolName
         names=`funcs_molNmod $MolName`
-        echo $names
         count=`expr "$count" + 1`
         continue;
     }
@@ -17,7 +15,7 @@ for opt in ${line[@]}; do
     detect_word=n
     for defined_word in ${defined_words}; do
         #[ $word = chain ] && [ $is_fullpack = y ] && { detect_word=y; break; }
-        [ $word = $defined_word ] && {
+        [ $opt = $defined_word ] && {
             tmps=(${names[@]})
             names=()
             for tmp in "${tmps[@]}"; do
@@ -25,7 +23,6 @@ for opt in ${line[@]}; do
                 names="${names[@]} $tmp2"
             done
             detect_word=y
-            echo ${names}
         }
     done
     [ $detect_word = y ] && continue
@@ -50,7 +47,8 @@ for opt in ${line[@]}; do
     done
     [ $detect_optnum = y ] && continue
     # other option detector ----------------------------------------------------------------------------------
-    [ `echo $opt | grep "RASSCF(\d+,\d+)(\d+,\d+,\d+)(\d+,\d+,\d+)(\d+,\d+,\d+)"` ] && {
+    #[ `echo $opt | grep $re_RASSCF` ] && {
+    [[ $opt =~ $re_RASSCF ]] && {
         tmps=$names
         names=()
         for tmp in $tmps; do

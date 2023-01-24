@@ -1,3 +1,6 @@
 !! you need place @ at the beginning of the line to
 @@ cluster=fugu usecore=max
-@cbl-ado TZVP SCF RASSCF(0,1)(10,0,0)(0,10,0)(6,6,1)
+c6h5n3 TZVP SCF RASSCF!0,1!!10,0,0!!0,10,0!!6,6,1!
+@c6h5n3 TZVP SCF RASSCF-0,1--10,0,0--0,10,0--6,6,1
+c6h5n3 TZVP SCF
+
