@@ -312,7 +312,7 @@ lct.DoTwoStepGuess = True
 lct.TCutPairs_Crude = 5e-6
 lct.TCutDOI_PAO_Crude = 1e-1
 lct.TCutDOI_Crude = 1e-2
-lct.PrintAllEps = False
+#lct.PrintAllEps = False
 
 
 lct.PrintPairDistDBG = True
@@ -340,6 +340,7 @@ hint.ImplTypePM = "sparse"
 hint.PSMVersion = 2
 lct.LocPower = 1
 
+hint.randomize=False
 hint.jacobi_thresh     = 1e-6 # Convergence threshold for Jacobi rotations
 hint.loc_thresh        = 1e-6 # Convergence thrshold for grad norm
 hint.cg_thresh         = 1e-6 # Convergence threshold for preconditioned conjugate gradient(=PCG) iterations

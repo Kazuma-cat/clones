@@ -63,6 +63,7 @@ while read -a opts; do
     # opts -> 'ReadInpOpt.sh' -> names ------------------------------------------------------
     echo "$ option processing -----------------------------------"
     #echo "#row option#       : ${opts[@]}"
+    #bash ${SplDir}ReadInpOpt.sh ${opts[@]}
     names=(`bash ${SplDir}ReadInpOpt.sh ${opts[@]}`) #.
     #echo "#processed option# : ${names[@]}"
     [ "`echo ${names[@]} | grep 'Error'`" ] && {

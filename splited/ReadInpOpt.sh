@@ -8,7 +8,7 @@ opt_other="orzgit2 orzmod chain distribute nolct MS5orz noGA3 CMO locCA locDV lo
 defined_opts="${opt_method} ${opt_moread} ${opt_other}"
 
 # number option
-opts_num="Tl locthresh Tj Tr TCutPNOrho0 TCutPairs TCutPre PMMaxIt PMStep PMAB PMang PMtrunc lvlshift ipeashift lctmaxiter Mbasis charge mult act roots StackSize DOIPower maxloop TCutDOI TCutDOIPAO TCutDOICrude TCutDOIPAOCrude TCutDOIActive  TCutPairsCrude"
+opts_num="Tl locthresh Tj Tr TCutPNOrho0 TCutPairs TCutPre PMMaxIt PMStep PMAB PMang PMtrunc lvlshift ipeashift lctmaxiter Mbasis charge mult act roots StackSize DOIPower maxloop TCutDOI TCutDOIPAO TCutDOICrude TCutDOIPAOCrude TCutDOIActive TCutPairsCrude"
 
 detect_opt=n
 for opt in $@; do
@@ -256,6 +256,19 @@ for opt in $@; do
         for tmp in ${tmps}; do
             tmp2=${tmp}_${opt}
             names="${names} $tmp2"
+        done
+    }
+    [ `echo $opt | grep nrandomize` ] && {
+        num="${opt:10}"
+        tmps="${names}"
+        names=
+        i=1
+        while [ $i -le $num ]; do
+            for tmp in ${tmps}; do
+                tmp2=${tmp}_nrandomize${i}
+                names="${names} $tmp2"
+            done
+            i=$((i+1))
         done
     }
     count=`expr "$count" + 1`

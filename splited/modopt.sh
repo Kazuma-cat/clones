@@ -625,6 +625,8 @@ case $opt in
                 echo "Error: ${MolName}.chkx could not be found."
                 exit 1
             fi
+        elif [ "`echo $opt | grep 'nrandomize'`" ];then
+            sed -i -e "s/hint.randomize.*/hint.randomize = True/g" $Dir$Name.py
         else
             echo "Pyfile Modification Error: ${opt} option is not defined"
         fi

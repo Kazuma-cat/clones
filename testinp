@@ -401,12 +401,25 @@
 !!benz-alkane_140_140 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 orzgit2
 !!benz-alkane_150_150 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 StackSize=150000000 orzgit2
 !! large system for LVMO det anlys
-benz-alkane_10_10  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 orzmod PrintAllEps
+!!benz-alkane_10_10  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 orzmod PrintAllEps
 !!benz-alkane_50_50  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
 !!benz-alkane_100_100  moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
 !!benz-alkane_50_50  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
 !!benz-alkane_100_100  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
 !!benz-alkane_50_50  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 PrintAllEps
+!! C110 randomize
+!!benz-alkane_110_110 moread-lochf-benzalk-def2svp maxloop0 LocMet=PSM1 newstdCrude PNO-NEVPT2 nrandomize5
+!!benz-alkane_110_110 moread-lochf-benzalk-def2svp maxloop0 LocMet=PMNR newstdCrude PNO-NEVPT2 nrandomize5
+!!benz-alkane_110_110 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 nrandomize5
+!!benz-alkane_110_110 moread-lochf-benzalk-def2svp maxloop0 PMPAO newstdCrude chain PNO-NEVPT2 nrandomize5
+!! C100 FBPAO TCutDOIActive
+benz-alkane_100_100 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude TCutDOIActive=3e-2,5e-2,7e-2 chain PNO-NEVPT2 orzgit2
+benz-alkane_100_100 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude TCutDOIActive=1.5e-2,2e-2,2.5e-2 chain PNO-NEVPT2 orzgit2
+benz-alkane_100_100 moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude TCutDOIActive=1.1e-2,1.25e-2,1.75e-2,2.25e-2 chain PNO-NEVPT2 orzgit2
+!!!old
+!!benz-alkane_100_100 moread-lochf-benzalk-def2svp maxloop0 stdCrude FBPAO TCutDOIActive=3e-2,5e-2,7e-2 PNO-NEVPT2
+!!benz-alkane_100_100 moread-lochf-benzalk-def2svp maxloop0 stdCrude FBPAO TCutDOIActive=1.5e-2,2e-2,2.5e-2 PNO-NEVPT2
+!!benz-alkane_100_100 moread-lochf-benzalk-def2svp maxloop0 stdCrude FBPAO TCutDOIActive=1.1e-2,1.25e-2,1.75e-2,2.25e-2 chain PNO-NEVPT2
 
 !!! large syetem for PAO second DOIActPAO
 !!benz-alkane_10_120  moread-lochf-benzalk-def2svp maxloop0 FBPAO newstdCrude chain PNO-NEVPT2 orzgit2 DOIActPAO
