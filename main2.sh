@@ -9,8 +9,6 @@ chkxroot=~kazuma/clones/chkx2
 . ~/clones/splited/clone_function.sh #.
 . ~/clones/splited/dir_setting.sh #.
 . ~/clones/splited/arg_setting.sh #.
-# ---------------------------------------
-
 export pydirs
 export PyDir1
 export PyDir2
@@ -19,6 +17,8 @@ export chkxDir
 export chkx_def2svp
 export chkx_sto3g
 export SplDir
+# ---------------------------------------
+
 
 # main prcess -------------------------------------------------
 cp ${RefDir}qsub.sh $Dir

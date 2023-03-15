@@ -1,0 +1,10 @@
+&GATEWAY
+ ricd   
+ COORD=
+ BASIS=
+ GROUP= 
+ TITLE=
+
+&SEWARD
+*tail
+* ===== END ===== *

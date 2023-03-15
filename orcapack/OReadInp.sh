@@ -24,6 +24,7 @@ for word in ${line[@]}; do
                 names="${names[@]} $tmp2"
             done
             detect_word=y
+            echo 'hey'
             echo ${names}
         }
     done

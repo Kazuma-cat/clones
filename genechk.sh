@@ -199,6 +199,7 @@ for filename in ${filelist[@]}; do
                 [ -d $tmpchkx/${chkxlist[$nchkx]}/$tmp ] && nodir=false
             done
             if [ a$nodir = atrue ]; then
+                extn=chkx
                 savename=${filename%%_*}
                 savename=${savename#cbl-};savename=${savename#cbi-}
                 logname=${tmpchkx}/${chkxlist[$nchkx]}
@@ -209,7 +210,7 @@ for filename in ${filelist[@]}; do
                 echo "logname = ${logname}"
                 read -p 'Is this correct? (y/n)' tmp
                 [ x$tmp != xy ] && continue
-                cp -i ${filename}.chkx ${tmpchkx}/${chkxlist[$nchkx]}/${savename}.chkx
+                cp -i ${filename}.$extn ${tmpchkx}/${chkxlist[$nchkx]}/${savename}.$extn
                 [ $? ] && echo "save as ${rootchkx}/${chkxlist[$nchkx]}/${savename}.chkx" | tee -a ~/record/genechk.rec
                 # record information --------------
                 [ -e ${tmpchkx}/${chkxlist[$nchkx]}/${logname}.log ] || touch ${tmpchkx}/${chkxlist[$nchkx]}/${logname}.log

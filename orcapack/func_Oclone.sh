@@ -58,16 +58,16 @@ funcs_molNmod(){
             tmpchk=n
             if [ `echo $names | grep cbi-` ]; then
                 tmp=${MolName#'cbi-'}
-                [ -e "${geomroot}/cbi/${tmp}.xyz" ] || { echo "Name Error: ${tmp}.xyz could not be found."; exit 1; }
+                [ -e "${geomroot}/cbi/${tmp}.xyz" ] || { echo "Name Error: ${tmp}.xyz could not be found.(in ${BASH_SOURCE[0]})\n"; exit 1; }
             elif [ `echo $names | grep cbl-` ]; then
                 tmp=${MolName#'cbl-'}
                 #echo ${geomroot}/cbl/${MolName}.xyz
-                [ -e "${geomroot}/cbl/${tmp}.xyz" ] || { echo "Name Error: ${tmp}.xyz could not be found."; exit 1; }
+                [ -e "${geomroot}/cbl/${tmp}.xyz" ] || { echo "Name Error: ${tmp}.xyz could not be found.(in ${BASH_SOURCE[0]})\n"; exit 1; }
             else
                 for tmp in ${geomdirs}; do
                     [ -e "${tmp}/${MolName}.xyz" ] && tmpchk=y
                 done
-                [ $tmpchk = n ] && { echo "Name Error: ${MolName}.xyz could not be found."; exit 1; }
+                [ $tmpchk = n ] && { echo "Name Error: ${MolName}.xyz could not be found. (in ${BASH_SOURCE[0]})\n"; exit 1; }
             fi
     esac
     echo $names
