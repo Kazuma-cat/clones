@@ -24,6 +24,8 @@ tmp2="2"
 
 # main process --------------------------
 cp ${RefDir}/sbatch.sh $dir
+cp ${RefDir}/cporb.sh $dir
+#chmod +x ${Dir}/cporb.sh
 chmod +x $dir/sbatch.sh
 while read -a setline; do
     #cat $molcroot/MCinp
@@ -96,6 +98,7 @@ while read -a setline; do
             sed -i -e "s/JOBNAME=.*/JOBNAME=${name}/g" $dir/${name}.sh
         done # End spl
         sed -i -e "s/filelist=(/filelist=(${names} /g" $dir/sbatch.sh
+        sed -i -e "s/filelist=(/filelist=(${names} /g" $dir/cporb.sh
     done # End name
 done < $molcroot/MCinp
 echo "--- END Mclone ---"
