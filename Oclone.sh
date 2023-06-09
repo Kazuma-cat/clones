@@ -1,4 +1,10 @@
 #!/bin/bash
+#cluster check
+clustername=
+[ "`pwd | grep '/home/users/dsw/'`" ] && clustername=ccfep
+[ "`pwd | grep '/home/20/kazuma/'`" ] && clustername=qcl
+
+#set variables
 export RefDir=~kazuma/clones
 export geomroot=~kazuma/clones/geom2
 export orcaroot=~kazuma/clones/orcapack
@@ -58,8 +64,13 @@ while read -a line; do
         if [ ${is_chain} = y ]; then
             :
         else
-            cp ${orcaroot}/orcash.sh $dir/$name.sh
-            sed -i -e "s/JOBNAME=.*/JOBNAME=${name}/g" $dir/${name}.sh
+            if [ $clustername = qcl ]; then
+                cp ${orcaroot}/orcash.sh $dir/$name.sh
+                sed -i -e "s/JOBNAME=.*/JOBNAME=${name}/g" $dir/${name}.sh
+            elif [ $clustername = ccfep ]; then
+                cp ${orcaroot}/orcash.sh $dir/$name.sh
+                sed -i -e "s/JOBNAME=.*/JOBNAME=${name}/g" $dir/${name}.sh
+            fi
         fi
     done # end of one file edit
     
@@ -73,8 +84,12 @@ while read -a line; do
         nchain=`expr $nchain + 1`
         is_chain=n
     else
-        sed -i -e "s/filelist=(/filelist=(${names} /g" $dir/qsub.sh
-        sed -i -e "s/usecore=.*/usecore=${usecore}/g" $dir/qsub.sh
-        sed -i -e "s/omp=.*/omp=${omp}/g" $dir/qsub.sh
+        if [ $clustername = qcl ]; then
+            sed -i -e "s/filelist=(/filelist=(${names} /g" $dir/qsub.sh
+            sed -i -e "s/usecore=.*/usecore=${usecore}/g" $dir/qsub.sh
+            sed -i -e "s/omp=.*/omp=${omp}/g" $dir/qsub.sh
+        elif [ $clustername = ccfep ]; then
+            
+        fi
     fi
 done < $orcaroot/OCinp # end of all line loop

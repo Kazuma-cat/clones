@@ -1,6 +1,6 @@
 #!/bin/sh
-#PBS -l select=1:ncpus=4:mpiprocs=4:ompthreads=1
-#PBS -l walltime=00:30:00
+#PBS -l select=1:ncpus=x:mpiprocs=x:ompthreads=x
+#PBS -l walltime=12:00:00
 
 if [ ! -z "${PBS_O_WORKDIR}" ]; then
   cd "${PBS_O_WORKDIR}"
