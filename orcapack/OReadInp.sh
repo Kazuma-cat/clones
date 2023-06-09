@@ -1,14 +1,18 @@
 #!/bin/bash
 # check whether molecule original python script in clone directory
 count=0
-defined_words="std-def2svp std-def2tzvp std-def2tzvpp std-def2qzvp std-def2qzvpp std2-sto3g std2-def2tzvpp RIMP2-def2svp RIMP2-def2tzvp RIMP2-def2tzvpp chain  SOSCF-KDIIS b3lyp b2plyp STEOM-DLPNO-CCSD def2svp-RIJ"
+def_method='b3lyp b2plyp m06 tpssh STEOM-DLPNO-CCSD'
+def_basis='def2-svp def2-tzvp '
+def_other='D3BJ D3zero opt freq chain tightscf'
+def_set="std-def2svp std-def2tzvp std-def2tzvpp std-def2qzvp std-def2qzvpp std2-sto3g std2-def2tzvpp RIMP2-def2svp RIMP2-def2tzvp RIMP2-def2tzvpp  SOSCF-KDIIS def2svp-RIJ rijcosx def2-tzvp-rijcosx"
+
+defined_words="$def_method $def_basis $def_other $def_set"
+#echo $defined_words
 for word in ${line[@]}; do
     # check whether molecule original python script in clone directory
     [ "$count" -eq 0 ] && {
         MolName="$word"
-        echo $MolName
         names=`funcs_molNmod $MolName`
-        echo $names
         count=`expr "$count" + 1`
         continue;
     }
@@ -24,8 +28,6 @@ for word in ${line[@]}; do
                 names="${names[@]} $tmp2"
             done
             detect_word=y
-            echo 'hey'
-            echo ${names}
         }
     done
     [ $detect_word = y ] && continue
@@ -62,7 +64,7 @@ for word in ${line[@]}; do
             names="$names $tmpname"
         done
     }
-    [ "`echo $word | grep 'TD='`" ] && {
+    [ "`echo $word | grep 'td=[0-9]\+-[0-9]\+'`" ] && {
         tmps=$names
         names=()
         for tmp in $tmps; do

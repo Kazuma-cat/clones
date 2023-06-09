@@ -13,9 +13,27 @@ case $option in
     a)
         ini_node=h01
         end_node=k28 ;;
+    e)
+        ini_node=e00
+        end_node=e14 ;;
+    f)
+        ini_node=f00
+        end_node=f07 ;;
+    g)
+        ini_node=g00
+        end_node=g07 ;;
+    h)
+        ini_node=h01
+        end_node=h07 ;;        
     i)
         ini_node=i00
         end_node=i03 ;;
+    j)
+        ini_node=j00
+        end_node=j01 ;;
+    com)
+        ini_node=compute-2-0
+        end_node=compute-2-24 ;;
     ni)
         ini_node=h01
         end_node=k28
@@ -113,5 +131,5 @@ for file in ${filelist[@]}; do
     echo "qsub -l ${nodeoption} -v OMP=$omp $file.sh" | tee -a ~/record/qsublog.rec $recname
     #qsub -l nodes=${node}:ppn=${usecore} $file.sh
     qsub -l "${nodeoption}" -v OMP=$omp $file.sh | tee -a ~/record/qsublog.rec $recname
-    echo '' | tee -a qsublog ~/record/qsublog.rec $recname
+    echo '' | tee -a ~/record/qsublog.rec $recname
 done

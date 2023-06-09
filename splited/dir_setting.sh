@@ -1,5 +1,11 @@
+RefDir=~kazuma/clones/
+SplDir=~kazuma/clones/splited/
+export pyroot=~kazuma/clones/pyFRgeom
+export geomroot=~/clones/geom2
+chkxroot=~kazuma/clones/chkx2
 #tmps=(pyfile_benzalkane3 pyfile_general pyfile_polyene Cbl)
 #tmps=(pyfile_benzalkane3 pyfile_general pyfile_polyene TrueCbi)
+
 tmps=(pyfile_benzalkane3 pyfile_general pyfile_polyene)
 for tmp in ${tmps[@]}; do
     pydirs="${pydirs[@]} ${pyroot}/${tmp}"

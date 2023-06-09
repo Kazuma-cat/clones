@@ -62,16 +62,21 @@ for opt in $@; do
                 }
                 
             done
-        elif [ ${MolName:0:11} = 'benz-alkane' ]; then
-            IFSBACK=$IFS
-            IFS=_
-            tmps=(${MolName})
-            IFS=$IFSBACK
-            Cmin=${tmps[1]:-0}
-            Cmax=${tmps[2]:-300}
-            for tmp in ${pydirs}; do
-                filenames=(${filenames[@]} `ls ${tmp}/benz-c*.py`)
-            done
+        elif [ "`echo $MolName | grep 'benzalk+[0-9]\++[0-9]\+'`" ]; then
+            tmps1=(${MolName//'-'/' '})
+            moln=${tmps1[${#tmps1[@]}-1]}
+            tmps2=(${moln//'+'/' '})
+            tmps1[${#tmps1[@]}-1]=''
+            tmps3=${tmps1[@]//' '/'-'}
+            tmps3=${tmps3}-
+            Cmin=${tmps2[1]:-0}
+            Cmax=${tmps2[2]:-300}
+            tmp=${tmps1[@]}
+            tmp=${tmp//' '/'/'}
+            filenames=`ls ${geomroot}/$tmp/benzc*.xyz`
+            #for tmp in ${pydirs}; do
+            #    filenames=(${filenames[@]} `ls ${tmp}/benz-c*.py`)
+            #done
             names=
             for filename in ${filenames[@]}; do
                 filename=`basename ${filename}`
@@ -81,26 +86,27 @@ for opt in $@; do
                 Hn=${Hn:1}
                 Cn2P2=`expr ${Cn} \* 2 + 2`
                 [ ${Hn} -eq ${Cn2P2} ] && [ ${Cn} -ge ${Cmin} ] && [ ${Cn} -le ${Cmax} ] && {
-                    names="${names} ${filename%.py}"
+                    names="${names} $tmps3${filename%.xyz}"
                 }
-                
             done
-            
         else
             names="$MolName"
-            if [ `echo $names | grep cbi-` ]; then
-                tmp=${MolName#'cbi-'}
-                [ -e "${pyroot}/cbi/${tmp}.py" ] || { echo "Name Error: ${MolName}.py could not be found."; exit 1; }
-            elif [ `echo $names | grep cbl-` ]; then
-                tmp=${MolName#'cbl-'}
-                [ -e "${pyroot}/cbl/${tmp}.py" ] || { echo "Name Error: ${MolName}.py could not be found."; exit 1; }
-            else
-                tmpchk=n
-                for tmp in ${pydirs}; do
-                    [ -e "${tmp}/${MolName}.py" ] && tmpchk=y
-                done
-                [ $tmpchk = n ] && { echo "Name Error: ${MolName}.py could not be found."; exit 1; }
-            fi
+            tmp=${MolName//'-'/'/'}
+            xyzpath=$geomroot/$tmp.xyz
+            [ -f $xyzpath ] || ls $xyzpath
+            #if [ `echo $names | grep cbi-` ]; then
+            #    tmp=${MolName#'cbi-'}
+            #    [ -e "${pyroot}/cbi/${tmp}.py" ] || { echo "Name Error: ${MolName}.py could not be found."; exit 1; }
+            #elif [ `echo $names | grep cbl-` ]; then
+            #    tmp=${MolName#'cbl-'}
+            #    [ -e "${pyroot}/cbl/${tmp}.py" ] || { echo "Name Error: ${MolName}.py could not be found."; exit 1; }
+            #else
+            #    tmpchk=n
+            #    for tmp in ${pydirs}; do
+            #        [ -e "${tmp}/${MolName}.py" ] && tmpchk=y
+            #    done
+            #    [ $tmpchk = n ] && { echo "Name Error: ${MolName}.py could not be found."; exit 1; }
+            #fi
         fi
         
         count=`expr "$count" + 1`

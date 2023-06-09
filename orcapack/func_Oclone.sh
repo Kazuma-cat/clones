@@ -51,43 +51,34 @@ funcs_molNmod(){
             names=`infuncs_molNmod_CnHn $MolName $moltype`;;
         benz-polyene)
             names=`infuncs_molNmod_CnHn $MolName $moltype`;;
-        benz-alkane)
+        benzalk)
             names=`infuncs_molNmod_CnHn $MolName $moltype`;;
         *)
             names=$MolName
-            tmpchk=n
-            if [ `echo $names | grep cbi-` ]; then
-                tmp=${MolName#'cbi-'}
-                [ -e "${geomroot}/cbi/${tmp}.xyz" ] || { echo "Name Error: ${tmp}.xyz could not be found.(in ${BASH_SOURCE[0]})\n"; exit 1; }
-            elif [ `echo $names | grep cbl-` ]; then
-                tmp=${MolName#'cbl-'}
-                #echo ${geomroot}/cbl/${MolName}.xyz
-                [ -e "${geomroot}/cbl/${tmp}.xyz" ] || { echo "Name Error: ${tmp}.xyz could not be found.(in ${BASH_SOURCE[0]})\n"; exit 1; }
-            else
-                for tmp in ${geomdirs}; do
-                    [ -e "${tmp}/${MolName}.xyz" ] && tmpchk=y
-                done
-                [ $tmpchk = n ] && { echo "Name Error: ${MolName}.xyz could not be found. (in ${BASH_SOURCE[0]})\n"; exit 1; }
-            fi
+            names="$MolName"
+            tmp=${MolName//'-'/'/'}
+            xyzpath=$geomroot/$tmp.xyz
+            [ -f $xyzpath ] || ls $xyzpath
     esac
     echo $names
 }
 func_xyz2orca(){
     name=$1
     MolName=$2
-    if [ `echo $MolName | grep cbi-` ]; then
-        MolName=${MolName#'cbi-'}
-        #name=${name#'cbi-'}
-        tmpdir=${geomroot}/cbi
-    elif [ `echo $MolName | grep cbl-` ]; then
-        MolName=${MolName#'cbl-'}
-        #name=${name#'cbl-'}
-        tmpdir=${geomroot}/cbl
-    else
-        for tmp in ${geomdirs}; do
-            [ -e "${tmp}/${MolName}.xyz" ] && tmpdir=${tmp}
-        done
-    fi
+    geompath=`geomdet $MolName`
+    #if [ `echo $MolName | grep cbi-` ]; then
+    #    MolName=${MolName#'cbi-'}
+    #    #name=${name#'cbi-'}
+    #    tmpdir=${geomroot}/cbi
+    #elif [ `echo $MolName | grep cbl-` ]; then
+    #    MolName=${MolName#'cbl-'}
+    #    #name=${name#'cbl-'}
+    #    tmpdir=${geomroot}/cbl
+    #else
+    #    for tmp in ${geomdirs}; do
+    #        [ -e "${tmp}/${MolName}.xyz" ] && tmpdir=${tmp}
+    #    done
+    #fi
     cp ${orcaroot}/orcabase.inp $dir/$name.inp
     geom=
     Nline=1
@@ -98,7 +89,7 @@ func_xyz2orca(){
         line=${line//}
         geom="${geom}${line[@]}\n"
         Nline=`expr $Nline + 1`
-    done < ${tmpdir}/${MolName}.xyz
+    done < $geompath #${tmpdir}/${MolName}.xyz
     sed -i -e "s/geom/$geom/g" $dir/$name.inp
 }
 

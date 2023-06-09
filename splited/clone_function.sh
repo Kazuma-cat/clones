@@ -105,3 +105,97 @@ mybasis(){
             ;;
     esac
 }
+xyz2orz(){
+    xyzpath=$1
+    pypath=$2
+    filebase=`basename $xyzpath`
+    geom=
+    frozen=0
+    closed=0
+    casclosed=0
+    occ=0
+    act=0
+    #cp ~/clones/pybase.py ${pypath}
+    Nline=0
+    while read -a line || [ -n $line ]; do
+        #echo $line
+        [ $Nline -eq 0 ] && { Nline=`expr $Nline + 1`;continue;}
+        [ $Nline -eq 1 ] && { Nline=`expr $Nline + 1`;continue;}
+        [ -z $line ] && break
+        [ ${#line[@]} != 4 ] && { echo ${#line[@]};Nline=`expr $Nline + 1`;continue;}
+        geom="${geom}\nqatom(atom.${line[0]}, [${line[1]}, ${line[2]}, ${line[3]}]),"
+        case ${line[0]} in
+            H)
+                closed=$((closed + 1));;
+            C)
+                frozen=$((frozen + 2))
+                closed=$((closed + 4));;
+            N)
+                frozen=$((frozen + 2))
+                closed=$((closed + 5));;
+            O)
+                frozen=$((frozen + 2))
+                closed=$((closed + 6));;
+            P)
+                frozen=$((frozen + 10))
+                closed=$((closed + 5));;
+            S)
+                frozen=$((frozen + 10))
+                closed=$((closed + 6));;
+            Cl)
+                frozen=$((frozen + 10))
+                closed=$((closed + 7));;
+            Co)
+                frozen=$((frozen + 10))
+                closed=$((closed + 17));;
+            Ni)
+                frozen=$((frozen + 10))
+                closed=$((closed + 18));;
+            *)
+                echo "detect undefined atom"
+        esac
+        Nline=`expr $Nline + 1`
+    done < $xyzpath
+    #frozen=`python -c "print($frozen/2)"`
+    frozen="`echo "scale=2; $frozen/2 " | bc`"
+    closed="`echo "scale=2; $closed/2 " | bc`"
+    #[ ${frozen: -1} -ne 0 || ${closed: -1} -ne 0 ] && exit "uncorrect electron number was detected"
+    [ ${frozen: -1} -ne 0 ] && exit "uncorrect electron number was detected"
+    [ ${closed: -1} -ne 0 ] && exit "uncorrect electron number was detected"
+    sed -i -e "s/# orb info bgn ------------/# orb info bgn ------------\n# orig frozen ... ${frozen}\n# orig closed ... ${closed}/g" ${pypath}
+    
+    frozen=`printf '%.0f\n' $frozen`
+    closed=`printf '%.0f\n' $closed`
+    #echo "geom=${geom}"
+    # active modification
+    tmp=(${xyzpath//\// })
+    case_benzalk="benzc[0-9]*h[0-9]*.xyz"
+    case ${tmp[-1]} in
+        $case_benzalk)
+            act=3;;
+        pyfile_benzalkane)
+            act=3;;
+        pyfile_benzalkane3)
+            act=3;;
+        pyfile_general)
+            act=0
+    esac
+    closed=$((closed - act))
+    occ=$((act * 2))
+    casclosed=$((frozen + closed))
+    sed -i -e "s/geom = \[/geom = \[${geom}/g" ${pypath}
+    sed -i -e "s/acene = .*\[/acene = \[${geom}/g" ${pypath}
+    sed -i -e "s/casscf.closed = \[0\]/casscf.closed = \[$casclosed\]/g" ${pypath}
+    sed -i -e "s/casscf.occ = \[0\]/casscf.occ = \[$occ\]/g" ${pypath}
+    sed -i -e "s/icmr.frozen = \[0\]/icmr.frozen = \[$frozen\]/g" ${pypath}
+    sed -i -e "s/icmr.closed = \[0\]/icmr.closed = \[$closed\]/g" ${pypath}
+    sed -i -e "s/icmr.occ = \[0\]/icmr.occ = \[$occ\]/g" ${pypath}
+    
+    
+}
+geom2py(){
+    molname=$1
+    pypath=$2
+    geompath=`geomdet $molname`
+    xyz2orz $geompath $pypath
+}

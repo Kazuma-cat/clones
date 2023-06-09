@@ -1,14 +1,15 @@
 #!/bin/bash
-[ "`pwd | grep 'clones'`" ] && { echo 'Do not employ main2.sh at the "clones" directory';}
-RefDir=~kazuma/clones/
-SplDir=~kazuma/clones/splited/
-export pyroot=~kazuma/clones/pyFRgeom
-#chkxroot=~kazuma/clones/chkx
-chkxroot=~kazuma/clones/chkx2
+[ "`pwd | grep 'clones'`" ] && { echo 'Do not employ main2.sh at the "clones" directory';exit 1;}
+#RefDir=~kazuma/clones/
+#SplDir=~kazuma/clones/splited/
+#export pyroot=~kazuma/clones/pyFRgeom
+##chkxroot=~kazuma/clones/chkx
+#chkxroot=~kazuma/clones/chkx2
 # setting -------------------------------
 . ~/clones/splited/clone_function.sh #.
 . ~/clones/splited/dir_setting.sh #.
 . ~/clones/splited/arg_setting.sh #.
+. ~/clones/com/com_func.sh #.
 export pydirs
 export PyDir1
 export PyDir2
@@ -25,9 +26,11 @@ cp ${RefDir}qsub.sh $Dir
 chmod +x ${Dir}qsub.sh
 while read -a opts; do
     [ -z ${opts} ] && continue
-    [ "`echo ${opts[@]} | grep '!!'`" ] && continue
+    #[ "`echo ${opts[@]} | grep '!!'`" ] && continue
+    [ ${opts:0:1} != '@' ] && continue
     # get options ------------------------------------------------
-    [ "`echo ${opts[@]} | grep '!'`" ] && {
+    #[ "`echo ${opts[@]} | grep '!'`" ] && {
+    [ ${opts:0:2} = '@@' ] && {
         for opt in ${opts[@]}; do
             [ "`echo $opt | grep 'Dir='`" ] && Dir=${opt:3}
             [ "`echo $opt | grep 'OrzVer='`" ] && OrzVer=${opt:7}
@@ -59,13 +62,15 @@ while read -a opts; do
         done # the end of option modification
         continue
     }
-
+    opts[0]=${opts[0]:1}
+    echo ${opts[@]}
     # opts -> 'ReadInpOpt.sh' -> names ------------------------------------------------------
     echo "$ option processing -----------------------------------"
     #echo "#row option#       : ${opts[@]}"
     #bash ${SplDir}ReadInpOpt.sh ${opts[@]}
+    #exit 1
     names=(`bash ${SplDir}ReadInpOpt.sh ${opts[@]}`) #.
-    #echo "#processed option# : ${names[@]}"
+    echo "#processed option# : ${names[@]}"
     [ "`echo ${names[@]} | grep 'Error'`" ] && {
         echo "Error: names variable contains inapproprite string, names='${names[@]}'"
         exit 1
@@ -78,22 +83,24 @@ while read -a opts; do
         opts=(${Name//_/ })
         MolName=${opts[@]:0:1}
         origmolname=${opts[@]:0:1}
-        if [ `echo $MolName | grep cbi-` ]; then
-            origMol=$MolName
-            MolName=${MolName#'cbi-'}
-            #Name=${Name#'cbi-'}
-            cp ${pyroot}/cbi/$MolName.py $Dir$Name.py
-        elif [ `echo $MolName | grep cbl-` ]; then
-            origMol=$MolName
-            MolName=${MolName#'cbl-'}
-            #Name=${Name#'cbl-'}
-            cp ${pyroot}/cbl/$MolName.py $Dir$Name.py
-        else
-            for tmp in ${pydirs}; do
-                [ -e "${tmp}/${MolName}.py" ] && tmpdir=${tmp}
-            done
-            cp ${tmpdir}/$MolName.py $Dir$Name.py
-        fi
+        cp ${RefDir}/pybase.py $Dir$Name.py
+        geom2py $MolName $Dir$Name.py
+        #if [ `echo $MolName | grep cbi-` ]; then
+        #    origMol=$MolName
+        #    MolName=${MolName#'cbi-'}
+        #    #Name=${Name#'cbi-'}
+        #    cp ${pyroot}/cbi/$MolName.py $Dir$Name.py
+        #elif [ `echo $MolName | grep cbl-` ]; then
+        #    origMol=$MolName
+        #    MolName=${MolName#'cbl-'}
+        #    #Name=${Name#'cbl-'}
+        #    cp ${pyroot}/cbl/$MolName.py $Dir$Name.py
+        #else
+        #    for tmp in ${pydirs}; do
+        #        [ -e "${tmp}/${MolName}.py" ] && tmpdir=${tmp}
+        #    done
+        #    cp ${tmpdir}/$MolName.py $Dir$Name.py
+        #fi
         
         # pre-modification
         #[ "`echo $Name | grep 'act'`" ] && actmod $Name $Dir
