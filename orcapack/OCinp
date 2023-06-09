@@ -11,6 +11,9 @@ opt-aziFeMe3cyclam charge=2 mult=1 tpssh def2-tzvp rijcosx tightscf td=100-5
 # high spin azide (more than 100K)
 orig-aziFeMe3cyclam charge=2 mult=5 tpssh opt def2-tzvp D3BJ freq
 opt2-aziFeMe3cyclam charge=2 mult=5 tpssh def2-tzvp rijcosx tightscf td=100-5
-@opt2-aziFeMe3cyclam charge=2 mult=5 tpssh def2-tzvp rijcosx tightscf D3BJ td=100-5
-
+opt2-aziFeMe3cyclam charge=2 mult=5 tpssh def2-tzvp rijcosx tightscf D3BJ td=100-5
+opt-aziFeMe3cyclamON4HS charge=2 mult=5 tpssh def2-tzvp rijcosx tightscf D3BJ td=100-5
+opt-aziFeMe3cyclamON4HS charge=2 mult=5 tpssh def2-tzvp rijcosx tightscf D3BJ td=100-5
+orig-aziFeMe3cyclam charge=1 mult=6 tpssh opt def2-tzvp D3BJ freq
+@opt-aziFeMe3cyclamON3HS charge=1 mult=6 tpssh def2-tzvp rijcosx tightscf D3BJ td=100-5
 
